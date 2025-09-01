@@ -6,10 +6,11 @@ const About = () => {
       <div className="max-w-3xl mx-auto px-4 text-center">
         <h2 className="text-3xl font-bold mb-4 text-tertiary">About Me</h2>
         <p className="text-lg mb-6 text-secondary">
-          {/* You can replace this with data from your constants/about.js if desired */}
-          I’m a passionate software engineer focused on building efficient,
-          maintainable applications. I love solving problems and making
-          developers’ lives easier.
+          I'm a devoted Christian, loving husband, and proud father who finds
+          deep fulfillment in crafting products that spark joy and meaningful
+          connections. My passion extends beyond code—I'm driven by the
+          opportunity to nurture and elevate fellow developers, helping them
+          discover their potential and grow their craft.
         </p>
         {/* Add more details or skills here as needed */}
       </div>

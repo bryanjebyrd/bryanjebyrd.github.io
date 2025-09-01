@@ -1,17 +1,12 @@
 const socials = [
   {
     name: 'Github',
-    url: 'https://github.com/',
+    url: 'https://github.com/bryanjebyrd',
     icon: 'github',
   },
   {
-    name: 'Instagram',
-    url: 'https://instagram.com/',
-    icon: 'instagram',
-  },
-  {
     name: 'LinkedIn',
-    url: 'https://linkedin.com/',
+    url: 'https://linkedin.com/in/bryan-byrd',
     icon: 'linkedin',
   },
 ];

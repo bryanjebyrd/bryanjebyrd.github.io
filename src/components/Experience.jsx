@@ -8,8 +8,7 @@ const Experience = () => {
           Experience
         </h2>
         <p className="text-lg mb-10 text-center text-on-surface-variant">
-          Here’s a quick look at my professional journey and the companies I’ve
-          worked with.
+          My professional journey and the companies I’ve worked with.
         </p>
         <div className="relative">
           {experiences.map((exp, idx) => (

@@ -1,4 +1,3 @@
-import logo from '../assets/logo/svg/logo-no-background.svg';
 import { useState } from 'react';
 import ThemeToggle from './ThemeToggle';
 import navlinks from '../constants/navigation';
@@ -17,7 +16,6 @@ const NavBar = () => {
             className="flex items-end gap-2"
             onClick={() => setActive('info')}
           >
-            <img src={logo} alt="logo" className="h-10" />
             <span className="font-bold text-lg text-on-primary">
               {hero.name}
             </span>

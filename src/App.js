@@ -40,10 +40,11 @@ function App() {
                   </p>
                   <div className="flex gap-4">
                     <a
-                      href="/resume.pdf"
+                      href="https://docs.google.com/document/d/1l7V2eWUpg4NuM05DsTA93d76itGnUwp4/edit?usp=sharing&ouid=108769390145539166411&rtpof=true&sd=true"
+                      target="_blank"
+                      rel="noopener noreferrer"
                       download
                       className="hire bg-primary text-on-primary px-5 py-2 rounded-lg font-semibold flex items-center gap-2 hover:bg-primary/80 transition"
-                      aria-label="Download Resume PDF"
                     >
                       Resume
                       <span className="inline-block w-4 h-4 bg-on-primary/30 rounded-full flex items-center justify-center">
@@ -109,15 +110,6 @@ function App() {
               </div>
               {/* Right */}
               <div className="flex flex-col items-center justify-center p-8 md:p-10 gap-4 md:border-l border-outline bg-surface-variant rounded-b-2xl md:rounded-b-none md:rounded-r-2xl">
-                <button
-                  type="button"
-                  className="online flex items-center gap-2 text-green-600 font-medium mb-2 cursor-default"
-                  tabIndex={-1}
-                  aria-disabled="true"
-                >
-                  <span className="inline-block w-3 h-3 bg-green-500 rounded-full"></span>
-                  Available For Job
-                </button>
                 {/* Profile image placeholder */}
                 <div className="w-32 h-32 rounded-full bg-on-surface/10 border-4 border-surface shadow-inner flex items-center justify-center overflow-hidden">
                   <img

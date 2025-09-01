@@ -35,13 +35,6 @@ const Footer = () => {
             </a>
           ))}
         </div>
-        <a
-          href="#"
-          className="online flex items-center gap-2 font-medium text-green-600"
-        >
-          <span className="inline-block w-3 h-3 rounded-full bg-green-500"></span>
-          Available For Job
-        </a>
       </div>
     </footer>
   );
