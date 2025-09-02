@@ -1,20 +1,23 @@
 {
   "files": {
-    "main.css": "/static/css/main.7a976c9b.css",
-    "main.js": "/static/js/main.f628f550.js",
+    "main.css": "/static/css/main.37130495.css",
+    "main.js": "/static/js/main.2e68222f.js",
     "static/js/453.fc246f69.chunk.js": "/static/js/453.fc246f69.chunk.js",
+    "static/media/personal.jpg": "/static/media/personal.570aa8461b8c39519a75.jpg",
+    "static/media/googleSheet.png": "/static/media/googleSheet.6abf1ee03cbde7a805b6.png",
+    "static/media/googleDoc.png": "/static/media/googleDoc.d1ff1888e05ee88888e0.png",
     "static/media/starbucks.png": "/static/media/starbucks.c086db5b166ea2f14de1.png",
     "static/media/github.png": "/static/media/github.ed1c06d925fff0b57e32.png",
     "static/media/close.svg": "/static/media/close.8de6460f269d97bdef87c899c2b54e45.svg",
     "static/media/menu.svg": "/static/media/menu.a14e08da817ed339d3849bc81037592d.svg",
     "static/media/threejs.svg": "/static/media/threejs.a02bc572667de670fbfb2173c0331d05.svg",
     "index.html": "/index.html",
-    "main.7a976c9b.css.map": "/static/css/main.7a976c9b.css.map",
-    "main.f628f550.js.map": "/static/js/main.f628f550.js.map",
+    "main.37130495.css.map": "/static/css/main.37130495.css.map",
+    "main.2e68222f.js.map": "/static/js/main.2e68222f.js.map",
     "453.fc246f69.chunk.js.map": "/static/js/453.fc246f69.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.7a976c9b.css",
-    "static/js/main.f628f550.js"
+    "static/css/main.37130495.css",
+    "static/js/main.2e68222f.js"
   ]
 }
