@@ -67,6 +67,10 @@ const influences = [
     name: '15 Secrets Successful People Know About Time Management by Kevin Kruse',
     link: 'https://kevinkruse.com/15-secrets-successful-people-know-about-time-management/',
   },
+  {
+    name: 'Start With Why by Simon Sinek',
+    link: 'https://simonsinek.com/books/start-with-why',
+  },
 ];
 
 export default influences;
