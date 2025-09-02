@@ -2,6 +2,7 @@ import NavBar from './components/NavBar';
 import About from './components/About';
 import Experience from './components/Experience';
 import Projects from './components/Projects';
+import Influences from './components/Influences';
 import Footer from './components/Footer';
 import { BrowserRouter } from 'react-router-dom';
 import hero from './constants/hero';
@@ -137,6 +138,10 @@ function App() {
           {/* Projects Section */}
           <section className="container mx-auto mb-5">
             <Projects />
+          </section>
+          {/* Influences Section */}
+          <section className="container mx-auto mb-5">
+            <Influences />
           </section>
         </main>
         <Footer />

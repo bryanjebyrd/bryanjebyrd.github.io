@@ -43,8 +43,7 @@ const experiences = [
     ],
   },
   {
-    title:
-      'Principal Software Engineer (Engineering Manager & Cloud Architect)',
+    title: 'Principal Engineer / Engineering Manager / Cloud Architect',
     company_name: 'Commissions Inc.',
     icon: 'icon',
     iconBg: '#FFF',

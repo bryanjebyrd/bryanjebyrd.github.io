@@ -27,9 +27,16 @@ const Experience = () => {
                     {exp.company_name}
                   </span>
                 </div>
-                <div className="text-sm text-on-surface-variant mb-1">
+                <div className="text-sm text-on-surface-variant mb-3">
                   {exp.date}
                 </div>
+                <ul className="list-disc list-inside space-y-2 text-sm text-on-surface">
+                  {exp.points.map((point, pointIdx) => (
+                    <li key={pointIdx} className="leading-relaxed">
+                      {point}
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ))}

@@ -16,7 +16,7 @@ const navlinks = [
   },
   {
     id: 'projects',
-    title: 'Projects',
+    title: 'Playbook',
     component: Projects,
   },
   {
