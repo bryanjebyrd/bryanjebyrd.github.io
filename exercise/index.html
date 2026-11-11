@@ -1,0 +1,227 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>Kettlebell Back Plan</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<style>
+/* Layout: single column of workout cards; each card has a live animated figure plus the start and finish frames */
+:root{
+  --bg:#f3f5f4; --surface:#ffffff; --fg:#1b2422; --muted:#5d6b67; --line:#d9e0dd;
+  --accent:#0f766e; --accent-soft:#d6efec; --iron:#2b3533; --warn:#b45309; --warn-soft:#fbecd9; --stage:#e8eeec;
+  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
+  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111816; --surface:#19221f; --fg:#e6eeeb; --muted:#9aaaa5; --line:#2c3834;
+  --accent:#2dd4bf; --accent-soft:#123b36; --iron:#c9d4d0; --warn:#f59e0b; --warn-soft:#3a2a10; --stage:#0d1412; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111816; --surface:#19221f; --fg:#e6eeeb; --muted:#9aaaa5; --line:#2c3834;
+  --accent:#2dd4bf; --accent-soft:#123b36; --iron:#c9d4d0; --warn:#f59e0b; --warn-soft:#3a2a10; --stage:#0d1412; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
+.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px;display:flex;flex-direction:column;gap:22px}
+h1,h2{font-family:var(--display);letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1.05}
+h1{font-size:clamp(2.2rem,6vw,3.2rem)}
+h2{font-size:1.75rem}
+.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
+.lede{color:var(--muted);max-width:62ch;margin:6px 0 0}
+button{font:600 .9rem var(--body);padding:9px 16px;border-radius:99px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);cursor:pointer}
+button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
+.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.v{padding:14px 16px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
+.v strong{display:block;font-family:var(--display);font-size:1.25rem;margin-bottom:4px}
+.v.keep strong{color:var(--accent)} .v.swap strong{color:var(--warn)}
+.v p{margin:0;color:var(--muted);font-size:.95rem}
+.circuit{background:var(--accent-soft);border-radius:10px;padding:16px 18px}
+.circuit h2{font-size:1.4rem;margin-bottom:8px}
+.circuit ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.circuit .note{margin:10px 0 0;font-size:.92rem;color:var(--muted)}
+.ex{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
+.ex-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px}
+.tag{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
+.tag.swap{background:var(--warn-soft);color:var(--warn)}
+.meta{color:var(--muted);font-size:.92rem;width:100%}
+.panels{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;align-items:stretch}
+@media (max-width:560px){.panels{grid-template-columns:1fr 1fr}.live{grid-column:1 / -1}}
+figure{margin:0;border:1px solid var(--line);border-radius:8px;padding:6px 6px 8px;text-align:center;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:4px}
+figure svg{width:100%;height:auto;display:block;margin:0 auto}
+.live{background:var(--stage);border-color:transparent;position:relative}
+.live svg{max-width:300px}
+.hud{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 6px}
+.phase{font-family:var(--display);font-size:1.25rem;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
+.reps{font-family:var(--display);font-size:1.25rem;font-variant-numeric:tabular-nums;color:var(--muted)}
+.reps b{color:var(--fg);font-size:1.6rem}
+figcaption{font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.ex ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
+.cue{margin:0;padding:10px 12px;border-left:3px solid var(--accent);background:var(--bg);font-size:.95rem}
+.cue.w{border-color:var(--warn)}
+.safety{font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+svg .limb{stroke:var(--fg);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
+svg .far{opacity:.45}
+svg .headc{fill:var(--surface);stroke:var(--fg);stroke-width:4}
+.live svg .headc{fill:var(--stage)}
+svg .bell{fill:var(--iron)} svg .handle{stroke:var(--iron);stroke-width:4;fill:none}
+svg .ground{stroke:var(--line);stroke-width:3}
+svg .arrow{stroke:var(--accent);stroke-width:3;fill:none;stroke-dasharray:6 5}
+svg .ah{fill:var(--accent)}
+svg .glow{fill:var(--accent)}
+svg .trail{stroke:var(--accent);stroke-width:2;fill:none;opacity:.35;stroke-dasharray:3 5}
+</style>
+
+<div class="wrap">
+  <header class="top">
+    <div>
+      <h1>Kettlebell Back Plan</h1>
+      <p class="lede">Seven short moves for your neck, upper back, lower back and legs. Watch the moving figure for the rhythm. The glow shows the muscles doing the work.</p>
+    </div>
+    <button id="toggle" type="button" aria-pressed="false">Pause</button>
+  </header>
+
+  <section class="verdict" aria-label="Your current moves">
+    <div class="v keep"><strong>Keep: the swing</strong><p>Hinging and snapping the hips trains the glutes and hamstrings, which take load off the lower back. You're doing the right move.</p></div>
+    <div class="v swap"><strong>Swap: the upright row to the chin</strong><p>The narrow grip pulled to the chin tends to pinch the shoulder joint, and it mostly works the upper traps, the same neck muscles that already feel tight. A bent-over row builds the mid-back muscles that hold your posture.</p></div>
+  </section>
+
+  <section class="circuit">
+    <h2>The daily 12 minutes</h2>
+    <ol>
+      <li>Swing: 15 to 20 reps</li>
+      <li>Goblet squat: 10 to 12 reps</li>
+      <li>One-arm row: 10 each side</li>
+      <li>Romanian deadlift: 10 reps</li>
+      <li>Halo: 5 each direction (go light)</li>
+      <li>Suitcase carry: 30 seconds each side</li>
+      <li>Chin tucks: 10 reps, no bell</li>
+    </ol>
+    <p class="note">Two rounds on most days. Stop a set when your form slips, not when you hit a number.</p>
+  </section>
+
+  <div id="list" style="display:flex;flex-direction:column;gap:22px"></div>
+
+  <p class="safety">If pain shoots down a leg or into an arm, or you feel numbness or tingling, stop and see a doctor or physical therapist before training through it.</p>
+</div>
+
+<script>
+const G=182;
+const STAND={head:[100,30],neck:[100,46],hip:[98,104]};
+const FRONTLEGS=[[[90,143],[86,G]],[[110,143],[114,G]]];
+const EX=[
+ {name:"Kettlebell swing",tag:"Keep",target:"Glutes, hamstrings, lower back",dose:"15 to 20 reps",period:1600,glow:"hip",
+  panels:[
+   {label:"Hike back",j:{head:[124,80],neck:[113,88],hip:[76,100],legs:[[[94,138],[88,G]]],arms:[[[104,118],[96,146]]],bell:[96,158],arrow:"M118 168 Q160 140 160 92"}},
+   {label:"Snap hips",j:{...STAND,legs:[[[100,143],[100,G]]],arms:[[[124,54],[148,60]]],bell:[160,62]}}],
+  steps:["Feet a little wider than shoulders, bell a foot in front of you.","Push your hips back, grab the bell and hike it back between your legs.","Drive your hips forward hard and squeeze your glutes. Let the bell float to chest height.","Let it fall back and hinge again as it comes down."],
+  cue:"Your hips do the work, not your arms. Back stays flat, never rounded."},
+ {name:"Goblet squat",tag:"New",target:"Thighs, glutes, core",dose:"10 to 12 reps",period:3000,glow:"knee",
+  panels:[
+   {label:"Stand tall",j:{...STAND,legs:[[[100,143],[100,G]]],arms:[[[112,72],[114,62]]],bell:[118,62]}},
+   {label:"Sit down",j:{head:[104,72],neck:[98,88],hip:[78,140],legs:[[[116,142],[100,G]]],arms:[[[112,112],[116,100]]],bell:[120,100],arrow:"M150 60 L150 110"}}],
+  steps:["Hold the bell upside down by the horns, tight against your chest.","Feet shoulder width, toes turned out slightly.","Sit straight down between your heels, keeping your chest up.","Go as low as you can with a flat back, then drive up through your whole foot."],
+  cue:"The bell at your chest keeps you upright, so it's much easier on your back than a barbell squat."},
+ {name:"One-arm bent-over row",tag:"Replaces upright row",swap:true,target:"Mid and upper back, the posture muscles",dose:"10 each side",period:2600,glow:"mid",
+  panels:[
+   {label:"Arm long",j:{head:[146,74],neck:[134,82],hip:[82,100],legs:[[[104,140],[108,G]],[[74,142],[62,G]]],arms:[[[120,106],[106,128]],[[134,108],[134,134]]],bell:[134,146],arrow:"M156 146 L156 104"}},
+   {label:"Elbow to hip",j:{head:[146,74],neck:[134,82],hip:[82,100],legs:[[[104,140],[108,G]],[[74,142],[62,G]]],arms:[[[120,106],[106,128]],[[112,70],[124,96]]],bell:[124,108]}}],
+  steps:["Step one foot forward and rest that hand on your front knee or a bench.","Hinge until your chest faces the floor at an angle, back flat.","Pull the bell toward your hip, driving the elbow back past your ribs.","Squeeze your shoulder blade toward your spine for a second, then lower slowly."],
+  cue:"Keep your shoulder down away from your ear. If your neck tenses, the bell is too heavy.",w:true},
+ {name:"Romanian deadlift",tag:"New",target:"Lower back, hamstrings, glutes",dose:"10 reps, slow",period:3400,glow:"hip",
+  panels:[
+   {label:"Stand tall",j:{...STAND,legs:[[[100,143],[100,G]]],arms:[[[104,75],[106,100]]],bell:[106,112]}},
+   {label:"Hinge",j:{head:[132,84],neck:[121,91],hip:[76,100],legs:[[[90,140],[90,G]]],arms:[[[120,118],[118,142]]],bell:[118,154],arrow:"M64 86 L40 86"}}],
+  steps:["Hold the bell with both hands in front of your thighs.","Soften your knees and push your hips straight back.","Slide the bell down your legs until you feel a stretch in your hamstrings.","Squeeze your glutes to stand back up."],
+  cue:"This is the slow version of the swing. It builds the strength the swing then uses."},
+ {name:"Halo",tag:"New",target:"Upper back, shoulders, neck mobility",dose:"5 each direction, light",period:3200,glow:"neck",halo:true,
+  panels:[
+   {label:"Bell at chest",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:FRONTLEGS,arms:[[[82,74],[100,66]],[[118,74],[100,66]]],bell:[100,58],front:true}},
+   {label:"Circle the head",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:FRONTLEGS,arms:[[[84,62],[76,42]],[[112,58],[80,44]]],bell:[70,30],front:true,circle:true}}],
+  steps:["Hold the bell upside down by the horns at your chest.","Circle it around your head, close to your neck, slow and controlled.","Return to your chest and reverse direction."],
+  cue:"Keep your ribs down and your head still. Let the shoulders move, not the neck."},
+ {name:"Suitcase carry",tag:"New",target:"Core and lower back stability",dose:"30 seconds each side",period:1200,glow:"waist",walk:true,
+  panels:[
+   {label:"Stand even",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:FRONTLEGS,arms:[[[80,74],[76,102]],[[120,74],[124,102]]],bell:[124,116],front:true}},
+   {label:"Walk tall",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:[[[108,143],[118,G]],[[92,143],[82,G]]],arms:[[[100,75],[100,102]]],bell:[100,114],arrow:"M132 120 L172 120"}}],
+  steps:["Pick up the bell in one hand like a suitcase.","Stand tall without leaning toward the bell.","Walk slowly around the room, then switch hands."],
+  cue:"The fight to stay upright is the exercise. Shoulders level the whole time."},
+ {name:"Chin tucks",tag:"New",target:"Deep neck muscles, forward head posture",dose:"10 reps, hold 3 seconds",period:3000,glow:"neck",
+  panels:[
+   {label:"Head forward",j:{head:[120,60],neck:[104,84],hip:[100,170],legs:[],arms:[[[102,122],[106,152]]]}},
+   {label:"Glide back",j:{head:[102,56],neck:[100,84],hip:[100,170],legs:[],arms:[[[102,122],[106,152]]],arrow:"M138 40 L114 40"}}],
+  steps:["Sit or stand tall, looking straight ahead.","Slide your chin straight back, like making a double chin. Don't tilt your head down.","Hold for three seconds and release."],
+  cue:"Do a few during the workday too, especially after long stretches at the desk."}
+];
+const NS="http://www.w3.org/2000/svg";
+function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
+let mk=0;
+function render(s,j,o={}){
+  s.textContent="";
+  const id="ah"+(mk++);
+  const d=el("defs",{},s),m=el("marker",{id,viewBox:"0 0 10 10",refX:"6",refY:"5",markerWidth:"5",markerHeight:"5",orient:"auto-start-reverse"},d);
+  el("path",{d:"M0 0 L10 5 L0 10 z",class:"ah"},m);
+  el("line",{x1:20,y1:G+2,x2:180,y2:G+2,class:"ground"},s);
+  if(o.glow){const[x,y,r,a]=o.glow;el("circle",{cx:x,cy:y,r,class:"glow",opacity:a},s)}
+  if(o.trail)el("ellipse",{cx:100,cy:36,rx:30,ry:28,class:"trail"},s);
+  const P=a=>a.join(" ");
+  j.legs.forEach((l,i)=>el("polyline",{points:[j.hip,l[0],l[1]].map(P).join(" "),class:"limb"+(i&&!j.front?" far":"")},s));
+  el("line",{x1:j.neck[0],y1:j.neck[1],x2:j.hip[0],y2:j.hip[1],class:"limb"},s);
+  j.arms.forEach((a,i)=>el("polyline",{points:[j.neck,a[0],a[1]].map(P).join(" "),class:"limb"+(i&&!j.front?" far":"")},s));
+  el("circle",{cx:j.head[0],cy:j.head[1],r:12,class:"headc"},s);
+  if(j.bell){const[x,y]=j.bell;el("path",{d:`M${x-6} ${y-7} Q${x} ${y-19} ${x+6} ${y-7}`,class:"handle"},s);el("circle",{cx:x,cy:y,r:10,class:"bell"},s)}
+  if(o.arrows!==false){
+    if(j.arrow)el("path",{d:j.arrow,class:"arrow","marker-end":`url(#${id})`},s);
+    if(j.circle)el("path",{d:"M128 54 A32 30 0 1 0 72 54",class:"arrow","marker-end":`url(#${id})`},s);
+  }
+}
+const lerp=(a,b,t)=>Array.isArray(a)?a.map((v,i)=>lerp(v,b[i],t)):a+(b-a)*t;
+function tween(A,B,t){const o={front:A.front};for(const k of ["head","neck","hip","legs","arms","bell"]){if(A[k]===undefined)continue;o[k]=lerp(A[k],B[k],t)}return o}
+function haloPose(a){
+  const bell=[100+30*Math.cos(a),36+28*Math.sin(a)], hand=[bell[0],bell[1]+7], neck=[100,46];
+  const mid=[(neck[0]+hand[0])/2,(neck[1]+hand[1])/2];
+  return {head:[100,30],neck,hip:[100,105],legs:FRONTLEGS,front:true,bell,arms:[[[mid[0]-16,mid[1]+10],hand],[[mid[0]+16,mid[1]+10],hand]]};
+}
+function walkPose(t){
+  const s=Math.sin(t*Math.PI*2),k=14*s;
+  return {head:[100,30],neck:[100,46],hip:[100,105],legs:[[[100+k*.6,143],[100+k,G]],[[100-k*.6,143],[100-k,G]]],arms:[[[100,75],[100,102]]],bell:[100,114+Math.abs(s)*1.5]};
+}
+function glowAt(x,j,i){
+  const n=j.neck,h=j.hip;
+  const pt={hip:h,neck:[n[0],n[1]-2],mid:[n[0]+(h[0]-n[0])*.35,n[1]+(h[1]-n[1])*.35],waist:[h[0],h[1]-14],knee:j.legs[0]?j.legs[0][0]:h}[x.glow];
+  return [pt[0],pt[1],14+8*i,(.18+.3*i).toFixed(2)];
+}
+const ease=x=>(1-Math.cos(Math.PI*x))/2;
+const lives=[];
+const list=document.getElementById("list");
+EX.forEach(x=>{
+  const c=document.createElement("article");c.className="ex";
+  c.innerHTML=`<div class="ex-head"><h2>${x.name}</h2><span class="tag${x.swap?" swap":""}">${x.tag}</span><div class="meta">${x.target} · ${x.dose}</div></div><div class="panels"></div><ol>${x.steps.map(s=>`<li>${s}</li>`).join("")}</ol><p class="cue${x.w?" w":""}">${x.cue}</p>`;
+  const p=c.querySelector(".panels");
+  const f=document.createElement("figure");f.className="live";
+  const svg=el("svg",{viewBox:"0 0 200 196",role:"img","aria-label":x.name+" animation"});
+  f.appendChild(svg);
+  const hud=document.createElement("div");hud.className="hud";hud.innerHTML=`<span class="phase">${x.panels[0].label}</span><span class="reps">Rep <b>1</b></span>`;
+  f.appendChild(hud);p.appendChild(f);
+  x.panels.forEach(pn=>{const fg=document.createElement("figure");const s=el("svg",{viewBox:"0 0 200 196",role:"img","aria-label":x.name+": "+pn.label});render(s,pn.j);fg.appendChild(s);const cap=document.createElement("figcaption");cap.textContent=pn.label;fg.appendChild(cap);p.appendChild(fg)});
+  lives.push({x,svg,phase:hud.querySelector(".phase"),reps:hud.querySelector("b"),last:-1});
+  list.appendChild(c);
+});
+function frame(now){
+  for(const L of lives){
+    const x=L.x,cyc=now/x.period,rep=Math.floor(cyc)%12+1,f=cyc%1;
+    let j,i,label;
+    if(x.halo){j=haloPose(Math.PI/2+f*Math.PI*2);i=.5+.5*Math.sin(f*Math.PI*2);label=f<.15||f>.85?x.panels[0].label:x.panels[1].label}
+    else if(x.walk){j=walkPose(f);i=.5+.5*Math.abs(Math.sin(f*Math.PI*2));label=x.panels[1].label}
+    else{const t=ease(f<.5?f*2:2-f*2);j=tween(x.panels[0].j,x.panels[1].j,t);i=t;label=t<.5?x.panels[0].label:x.panels[1].label}
+    render(L.svg,j,{arrows:false,trail:x.halo,glow:glowAt(x,j,i)});
+    if(L.phase.textContent!==label)L.phase.textContent=label;
+    if(L.last!==rep){L.reps.textContent=rep;L.last=rep}
+  }
+}
+let playing=true,raf=0,offset=0,pausedAt=0;
+const btn=document.getElementById("toggle");
+function loop(now){frame(now-offset);raf=requestAnimationFrame(loop)}
+function play(){offset+=performance.now()-pausedAt;playing=true;btn.textContent="Pause";btn.setAttribute("aria-pressed","false");raf=requestAnimationFrame(loop)}
+function pause(){cancelAnimationFrame(raf);pausedAt=performance.now();playing=false;btn.textContent="Play";btn.setAttribute("aria-pressed","true")}
+btn.addEventListener("click",()=>playing?pause():play());
+frame(0);
+let reduce=false;try{reduce=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
+if(reduce){pausedAt=performance.now();playing=false;btn.textContent="Play";btn.setAttribute("aria-pressed","true")}else{raf=requestAnimationFrame(loop)}
+</script>
+
+</body></html>
