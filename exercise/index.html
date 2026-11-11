@@ -1,227 +1,607 @@
-<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<title>Kettlebell Back Plan</title>
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<title>Bry's Workout and Stretches</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Inter:wght@400;500;600&display=swap">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Barlow:wght@400;500;600&display=swap">
 <style>
-/* Layout: single column of workout cards; each card has a live animated figure plus the start and finish frames */
-:root{
-  --bg:#f3f5f4; --surface:#ffffff; --fg:#1b2422; --muted:#5d6b67; --line:#d9e0dd;
-  --accent:#0f766e; --accent-soft:#d6efec; --iron:#2b3533; --warn:#b45309; --warn-soft:#fbecd9; --stage:#e8eeec;
-  --display:"Barlow Condensed","Arial Narrow",system-ui,sans-serif;
-  --body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+/* Layout: gym-wall placard. Header, section chips, then a grid of move cards grouped by when you do them. */
+:root {
+  --bg: #eef1ec; --card: #fbfcfa; --stage: #fbfcfa; --ink: #18211c; --muted: #5d6a62; --line: #d3dbd2;
+  --fig: #18211c; --fig-far: #8d9a92; --accent: #2b7552; --accent-soft: #dcebe2; --tape: #f1c232; --tape-ink: #2b2208;
+  --floor: #e2e8e0; --figline: #b7c2b8; --prop: #cdbb9c; --prop-top: #a88f69; --wall: #e8ece5; --kb: #3a4440;
+  --warn: #9a4d0a; --warn-soft: #f7e7d3;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", sans-serif;
+  --body: "Barlow", system-ui, -apple-system, "Segoe UI", sans-serif;
 }
-@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
-  --bg:#111816; --surface:#19221f; --fg:#e6eeeb; --muted:#9aaaa5; --line:#2c3834;
-  --accent:#2dd4bf; --accent-soft:#123b36; --iron:#c9d4d0; --warn:#f59e0b; --warn-soft:#3a2a10; --stage:#0d1412; color-scheme:dark}}
-:root[data-theme="dark"]{
-  --bg:#111816; --surface:#19221f; --fg:#e6eeeb; --muted:#9aaaa5; --line:#2c3834;
-  --accent:#2dd4bf; --accent-soft:#123b36; --iron:#c9d4d0; --warn:#f59e0b; --warn-soft:#3a2a10; --stage:#0d1412; color-scheme:dark}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:16px;line-height:1.55}
-.wrap{max-width:860px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:28px 56px;display:flex;flex-direction:column;gap:22px}
-h1,h2{font-family:var(--display);letter-spacing:.01em;text-wrap:balance;margin:0;line-height:1.05}
-h1{font-size:clamp(2.2rem,6vw,3.2rem)}
-h2{font-size:1.75rem}
-.top{display:flex;flex-wrap:wrap;gap:12px;align-items:flex-end;justify-content:space-between}
-.lede{color:var(--muted);max-width:62ch;margin:6px 0 0}
-button{font:600 .9rem var(--body);padding:9px 16px;border-radius:99px;border:1px solid var(--accent);background:var(--accent);color:var(--surface);cursor:pointer}
-button:focus-visible{outline:3px solid var(--accent);outline-offset:3px}
-.verdict{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
-.v{padding:14px 16px;border-radius:10px;background:var(--surface);border:1px solid var(--line)}
-.v strong{display:block;font-family:var(--display);font-size:1.25rem;margin-bottom:4px}
-.v.keep strong{color:var(--accent)} .v.swap strong{color:var(--warn)}
-.v p{margin:0;color:var(--muted);font-size:.95rem}
-.circuit{background:var(--accent-soft);border-radius:10px;padding:16px 18px}
-.circuit h2{font-size:1.4rem;margin-bottom:8px}
-.circuit ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
-.circuit .note{margin:10px 0 0;font-size:.92rem;color:var(--muted)}
-.ex{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px;display:flex;flex-direction:column;gap:12px}
-.ex-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px}
-.tag{font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:var(--accent-soft);color:var(--accent)}
-.tag.swap{background:var(--warn-soft);color:var(--warn)}
-.meta{color:var(--muted);font-size:.92rem;width:100%}
-.panels{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;align-items:stretch}
-@media (max-width:560px){.panels{grid-template-columns:1fr 1fr}.live{grid-column:1 / -1}}
-figure{margin:0;border:1px solid var(--line);border-radius:8px;padding:6px 6px 8px;text-align:center;min-width:0;display:flex;flex-direction:column;justify-content:space-between;gap:4px}
-figure svg{width:100%;height:auto;display:block;margin:0 auto}
-.live{background:var(--stage);border-color:transparent;position:relative}
-.live svg{max-width:300px}
-.hud{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:0 6px}
-.phase{font-family:var(--display);font-size:1.25rem;color:var(--accent);text-transform:uppercase;letter-spacing:.04em}
-.reps{font-family:var(--display);font-size:1.25rem;font-variant-numeric:tabular-nums;color:var(--muted)}
-.reps b{color:var(--fg);font-size:1.6rem}
-figcaption{font-size:.82rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
-.ex ol{margin:0;padding-left:1.3em;display:grid;gap:4px}
-.cue{margin:0;padding:10px 12px;border-left:3px solid var(--accent);background:var(--bg);font-size:.95rem}
-.cue.w{border-color:var(--warn)}
-.safety{font-size:.92rem;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
-svg .limb{stroke:var(--fg);stroke-width:5;stroke-linecap:round;stroke-linejoin:round;fill:none}
-svg .far{opacity:.45}
-svg .headc{fill:var(--surface);stroke:var(--fg);stroke-width:4}
-.live svg .headc{fill:var(--stage)}
-svg .bell{fill:var(--iron)} svg .handle{stroke:var(--iron);stroke-width:4;fill:none}
-svg .ground{stroke:var(--line);stroke-width:3}
-svg .arrow{stroke:var(--accent);stroke-width:3;fill:none;stroke-dasharray:6 5}
-svg .ah{fill:var(--accent)}
-svg .glow{fill:var(--accent)}
-svg .trail{stroke:var(--accent);stroke-width:2;fill:none;opacity:.35;stroke-dasharray:3 5}
+@media (prefers-color-scheme: dark) { :root:not([data-theme="light"]) {
+  --bg: #111613; --card: #19201c; --stage: #1e2621; --ink: #e6ece7; --muted: #9aa8a0; --line: #2d3731;
+  --fig: #e6ece7; --fig-far: #7d8a83; --accent: #6cc597; --accent-soft: #23362b; --tape: #f2c744; --tape-ink: #2b2208;
+  --floor: #26302a; --figline: #3f4b44; --prop: #5c4f3c; --prop-top: #7d6a4d; --wall: #222b26; --kb: #b9c4bd;
+  --warn: #f0a75a; --warn-soft: #3a2a17; color-scheme: dark } }
+:root[data-theme="dark"] {
+  --bg: #111613; --card: #19201c; --stage: #1e2621; --ink: #e6ece7; --muted: #9aa8a0; --line: #2d3731;
+  --fig: #e6ece7; --fig-far: #7d8a83; --accent: #6cc597; --accent-soft: #23362b; --tape: #f2c744; --tape-ink: #2b2208;
+  --floor: #26302a; --figline: #3f4b44; --prop: #5c4f3c; --prop-top: #7d6a4d; --wall: #222b26; --kb: #b9c4bd;
+  --warn: #f0a75a; --warn-soft: #3a2a17; color-scheme: dark }
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 16px; line-height: 1.5; margin: 0; }
+.wrap { max-width: 1180px; margin: 0 auto; padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 28px 56px; }
+header { display: grid; gap: 14px; margin-bottom: 26px; }
+.eyebrow { font-family: var(--display); font-weight: 700; letter-spacing: .12em; text-transform: uppercase; font-size: 14px; color: var(--accent); }
+h1 { font-family: var(--display); font-weight: 800; font-size: clamp(40px, 7vw, 68px); line-height: .92; margin: 0; letter-spacing: -.01em; text-transform: uppercase; text-wrap: balance; }
+.lede { margin: 0; color: var(--muted); max-width: 60ch; }
+.bar { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.chip { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .05em; text-transform: uppercase; text-decoration: none; color: var(--ink); border: 1.5px solid var(--line); padding: 5px 12px; border-radius: 999px; background: var(--card); }
+.chip:hover, .chip:focus-visible { border-color: var(--accent); color: var(--accent); outline: none; }
+.tally { margin-left: auto; font-family: var(--display); font-weight: 700; font-size: 16px; letter-spacing: .04em; text-transform: uppercase; background: var(--tape); color: var(--tape-ink); padding: 5px 12px; border-radius: 4px; transform: rotate(-1.2deg); }
+section { margin-top: 38px; scroll-margin-top: 16px; }
+.sec-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 14px; border-bottom: 2px solid var(--ink); padding-bottom: 8px; margin-bottom: 16px; }
+.sec-head h2 { font-family: var(--display); font-weight: 800; font-size: 32px; margin: 0; text-transform: uppercase; line-height: 1; }
+.sec-head p { margin: 0; color: var(--muted); }
+.callout { margin: 0 0 16px; padding: 10px 14px; border-radius: 8px; background: var(--warn-soft); color: var(--ink); font-size: 15px; max-width: 80ch; }
+.callout b { color: var(--warn); }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 268px), 1fr)); gap: 16px; }
+.card { background: var(--card); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; min-width: 0; }
+.stage { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; max-width: 100%; background: var(--stage); border: 0; padding: 0; cursor: pointer; border-bottom: 1px solid var(--line); }
+.stage canvas { width: 100%; height: 100%; display: block; }
+.stage:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.pp { position: absolute; top: 8px; right: 8px; font-family: var(--display); font-weight: 700; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); background: var(--card); border: 1px solid var(--line); border-radius: 999px; padding: 2px 9px; }
+.phase { font-family: var(--display); font-weight: 600; font-size: 17px; line-height: 1.2; color: var(--accent); background: var(--accent-soft); padding: 8px 14px; min-height: 2.65em; display: flex; align-items: center; }
+.body { padding: 12px 14px 14px; display: grid; gap: 10px; flex: 1; align-content: start; }
+.top { display: flex; justify-content: space-between; gap: 10px; align-items: start; }
+.card h3 { font-family: var(--display); font-weight: 800; font-size: 26px; line-height: 1; margin: 0; text-transform: uppercase; text-wrap: balance; }
+.when { font-size: 14px; color: var(--muted); margin-top: 4px; }
+.reps { text-align: right; flex-shrink: 0; }
+.reps b { display: block; font-family: var(--display); font-weight: 800; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; }
+.reps span { display: block; font-size: 12px; color: var(--muted); max-width: 13ch; line-height: 1.25; }
+ul { margin: 0; padding-left: 18px; display: grid; gap: 3px; font-size: 15px; }
+.foot { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; padding: 0 14px 14px; }
+.btn { font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .05em; text-transform: uppercase; border-radius: 6px; padding: 7px 12px; border: 1.5px solid var(--line); background: transparent; color: var(--ink); cursor: pointer; text-decoration: none; }
+.btn:hover, .btn:focus-visible { border-color: var(--accent); outline: none; }
+.reset { padding: 4px 12px; background: var(--card); }
+.done[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: var(--card); }
+.note { margin-top: 30px; color: var(--muted); font-size: 14px; border-left: 3px solid var(--tape); padding-left: 12px; max-width: 70ch; }
 </style>
 
 <div class="wrap">
-  <header class="top">
-    <div>
-      <h1>Kettlebell Back Plan</h1>
-      <p class="lede">Seven short moves for your neck, upper back, lower back and legs. Watch the moving figure for the rhythm. The glow shows the muscles doing the work.</p>
-    </div>
-    <button id="toggle" type="button" aria-pressed="false">Pause</button>
+  <header>
+    <div class="eyebrow">Workouts and stretches</div>
+    <h1>Bry's Workout and Stretches</h1>
+    <p class="lede">Every move, animated so you can see it. Watch one loop and go. Tap any figure to pause it. Small counts: one set is a win.</p>
+    <nav class="bar" aria-label="Sections">
+      <a class="chip" href="#kb">Kettlebell</a>
+      <a class="chip" href="#cues">Daily cues</a>
+      <a class="chip" href="#core">Core finisher</a>
+      <a class="chip" href="#back">Lower back</a>
+      <a class="chip" href="#neck">Neck and upper back</a>
+      <span class="tally" id="tally">Done today: 0</span>
+      <button class="btn reset" id="reset" type="button">Reset all</button>
+    </nav>
   </header>
-
-  <section class="verdict" aria-label="Your current moves">
-    <div class="v keep"><strong>Keep: the swing</strong><p>Hinging and snapping the hips trains the glutes and hamstrings, which take load off the lower back. You're doing the right move.</p></div>
-    <div class="v swap"><strong>Swap: the upright row to the chin</strong><p>The narrow grip pulled to the chin tends to pinch the shoulder joint, and it mostly works the upper traps, the same neck muscles that already feel tight. A bent-over row builds the mid-back muscles that hold your posture.</p></div>
-  </section>
-
-  <section class="circuit">
-    <h2>The daily 12 minutes</h2>
-    <ol>
-      <li>Swing: 15 to 20 reps</li>
-      <li>Goblet squat: 10 to 12 reps</li>
-      <li>One-arm row: 10 each side</li>
-      <li>Romanian deadlift: 10 reps</li>
-      <li>Halo: 5 each direction (go light)</li>
-      <li>Suitcase carry: 30 seconds each side</li>
-      <li>Chin tucks: 10 reps, no bell</li>
-    </ol>
-    <p class="note">Two rounds on most days. Stop a set when your form slips, not when you hit a number.</p>
-  </section>
-
-  <div id="list" style="display:flex;flex-direction:column;gap:22px"></div>
-
-  <p class="safety">If pain shoots down a leg or into an arm, or you feel numbness or tingling, stop and see a doctor or physical therapist before training through it.</p>
+  <main id="sections"></main>
+  <p class="note">Grey limbs are your far side. Green shows the part doing the work. Go easy on cracking your neck. If pain shoots down a leg or arm, or you get numbness, tingling, or headaches that keep getting worse, stop and see a doctor.</p>
 </div>
 
 <script>
-const G=182;
-const STAND={head:[100,30],neck:[100,46],hip:[98,104]};
-const FRONTLEGS=[[[90,143],[86,G]],[[110,143],[114,G]]];
-const EX=[
- {name:"Kettlebell swing",tag:"Keep",target:"Glutes, hamstrings, lower back",dose:"15 to 20 reps",period:1600,glow:"hip",
-  panels:[
-   {label:"Hike back",j:{head:[124,80],neck:[113,88],hip:[76,100],legs:[[[94,138],[88,G]]],arms:[[[104,118],[96,146]]],bell:[96,158],arrow:"M118 168 Q160 140 160 92"}},
-   {label:"Snap hips",j:{...STAND,legs:[[[100,143],[100,G]]],arms:[[[124,54],[148,60]]],bell:[160,62]}}],
-  steps:["Feet a little wider than shoulders, bell a foot in front of you.","Push your hips back, grab the bell and hike it back between your legs.","Drive your hips forward hard and squeeze your glutes. Let the bell float to chest height.","Let it fall back and hinge again as it comes down."],
-  cue:"Your hips do the work, not your arms. Back stays flat, never rounded."},
- {name:"Goblet squat",tag:"New",target:"Thighs, glutes, core",dose:"10 to 12 reps",period:3000,glow:"knee",
-  panels:[
-   {label:"Stand tall",j:{...STAND,legs:[[[100,143],[100,G]]],arms:[[[112,72],[114,62]]],bell:[118,62]}},
-   {label:"Sit down",j:{head:[104,72],neck:[98,88],hip:[78,140],legs:[[[116,142],[100,G]]],arms:[[[112,112],[116,100]]],bell:[120,100],arrow:"M150 60 L150 110"}}],
-  steps:["Hold the bell upside down by the horns, tight against your chest.","Feet shoulder width, toes turned out slightly.","Sit straight down between your heels, keeping your chest up.","Go as low as you can with a flat back, then drive up through your whole foot."],
-  cue:"The bell at your chest keeps you upright, so it's much easier on your back than a barbell squat."},
- {name:"One-arm bent-over row",tag:"Replaces upright row",swap:true,target:"Mid and upper back, the posture muscles",dose:"10 each side",period:2600,glow:"mid",
-  panels:[
-   {label:"Arm long",j:{head:[146,74],neck:[134,82],hip:[82,100],legs:[[[104,140],[108,G]],[[74,142],[62,G]]],arms:[[[120,106],[106,128]],[[134,108],[134,134]]],bell:[134,146],arrow:"M156 146 L156 104"}},
-   {label:"Elbow to hip",j:{head:[146,74],neck:[134,82],hip:[82,100],legs:[[[104,140],[108,G]],[[74,142],[62,G]]],arms:[[[120,106],[106,128]],[[112,70],[124,96]]],bell:[124,108]}}],
-  steps:["Step one foot forward and rest that hand on your front knee or a bench.","Hinge until your chest faces the floor at an angle, back flat.","Pull the bell toward your hip, driving the elbow back past your ribs.","Squeeze your shoulder blade toward your spine for a second, then lower slowly."],
-  cue:"Keep your shoulder down away from your ear. If your neck tenses, the bell is too heavy.",w:true},
- {name:"Romanian deadlift",tag:"New",target:"Lower back, hamstrings, glutes",dose:"10 reps, slow",period:3400,glow:"hip",
-  panels:[
-   {label:"Stand tall",j:{...STAND,legs:[[[100,143],[100,G]]],arms:[[[104,75],[106,100]]],bell:[106,112]}},
-   {label:"Hinge",j:{head:[132,84],neck:[121,91],hip:[76,100],legs:[[[90,140],[90,G]]],arms:[[[120,118],[118,142]]],bell:[118,154],arrow:"M64 86 L40 86"}}],
-  steps:["Hold the bell with both hands in front of your thighs.","Soften your knees and push your hips straight back.","Slide the bell down your legs until you feel a stretch in your hamstrings.","Squeeze your glutes to stand back up."],
-  cue:"This is the slow version of the swing. It builds the strength the swing then uses."},
- {name:"Halo",tag:"New",target:"Upper back, shoulders, neck mobility",dose:"5 each direction, light",period:3200,glow:"neck",halo:true,
-  panels:[
-   {label:"Bell at chest",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:FRONTLEGS,arms:[[[82,74],[100,66]],[[118,74],[100,66]]],bell:[100,58],front:true}},
-   {label:"Circle the head",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:FRONTLEGS,arms:[[[84,62],[76,42]],[[112,58],[80,44]]],bell:[70,30],front:true,circle:true}}],
-  steps:["Hold the bell upside down by the horns at your chest.","Circle it around your head, close to your neck, slow and controlled.","Return to your chest and reverse direction."],
-  cue:"Keep your ribs down and your head still. Let the shoulders move, not the neck."},
- {name:"Suitcase carry",tag:"New",target:"Core and lower back stability",dose:"30 seconds each side",period:1200,glow:"waist",walk:true,
-  panels:[
-   {label:"Stand even",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:FRONTLEGS,arms:[[[80,74],[76,102]],[[120,74],[124,102]]],bell:[124,116],front:true}},
-   {label:"Walk tall",j:{head:[100,30],neck:[100,46],hip:[100,105],legs:[[[108,143],[118,G]],[[92,143],[82,G]]],arms:[[[100,75],[100,102]]],bell:[100,114],arrow:"M132 120 L172 120"}}],
-  steps:["Pick up the bell in one hand like a suitcase.","Stand tall without leaning toward the bell.","Walk slowly around the room, then switch hands."],
-  cue:"The fight to stay upright is the exercise. Shoulders level the whole time."},
- {name:"Chin tucks",tag:"New",target:"Deep neck muscles, forward head posture",dose:"10 reps, hold 3 seconds",period:3000,glow:"neck",
-  panels:[
-   {label:"Head forward",j:{head:[120,60],neck:[104,84],hip:[100,170],legs:[],arms:[[[102,122],[106,152]]]}},
-   {label:"Glide back",j:{head:[102,56],neck:[100,84],hip:[100,170],legs:[],arms:[[[102,122],[106,152]]],arrow:"M138 40 L114 40"}}],
-  steps:["Sit or stand tall, looking straight ahead.","Slide your chin straight back, like making a double chin. Don't tilt your head down.","Hold for three seconds and release."],
-  cue:"Do a few during the workday too, especially after long stretches at the desk."}
-];
-const NS="http://www.w3.org/2000/svg";
-function el(t,a,p){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);p&&p.appendChild(e);return e}
-let mk=0;
-function render(s,j,o={}){
-  s.textContent="";
-  const id="ah"+(mk++);
-  const d=el("defs",{},s),m=el("marker",{id,viewBox:"0 0 10 10",refX:"6",refY:"5",markerWidth:"5",markerHeight:"5",orient:"auto-start-reverse"},d);
-  el("path",{d:"M0 0 L10 5 L0 10 z",class:"ah"},m);
-  el("line",{x1:20,y1:G+2,x2:180,y2:G+2,class:"ground"},s);
-  if(o.glow){const[x,y,r,a]=o.glow;el("circle",{cx:x,cy:y,r,class:"glow",opacity:a},s)}
-  if(o.trail)el("ellipse",{cx:100,cy:36,rx:30,ry:28,class:"trail"},s);
-  const P=a=>a.join(" ");
-  j.legs.forEach((l,i)=>el("polyline",{points:[j.hip,l[0],l[1]].map(P).join(" "),class:"limb"+(i&&!j.front?" far":"")},s));
-  el("line",{x1:j.neck[0],y1:j.neck[1],x2:j.hip[0],y2:j.hip[1],class:"limb"},s);
-  j.arms.forEach((a,i)=>el("polyline",{points:[j.neck,a[0],a[1]].map(P).join(" "),class:"limb"+(i&&!j.front?" far":"")},s));
-  el("circle",{cx:j.head[0],cy:j.head[1],r:12,class:"headc"},s);
-  if(j.bell){const[x,y]=j.bell;el("path",{d:`M${x-6} ${y-7} Q${x} ${y-19} ${x+6} ${y-7}`,class:"handle"},s);el("circle",{cx:x,cy:y,r:10,class:"bell"},s)}
-  if(o.arrows!==false){
-    if(j.arrow)el("path",{d:j.arrow,class:"arrow","marker-end":`url(#${id})`},s);
-    if(j.circle)el("path",{d:"M128 54 A32 30 0 1 0 72 54",class:"arrow","marker-end":`url(#${id})`},s);
-  }
-}
-const lerp=(a,b,t)=>Array.isArray(a)?a.map((v,i)=>lerp(v,b[i],t)):a+(b-a)*t;
-function tween(A,B,t){const o={front:A.front};for(const k of ["head","neck","hip","legs","arms","bell"]){if(A[k]===undefined)continue;o[k]=lerp(A[k],B[k],t)}return o}
-function haloPose(a){
-  const bell=[100+30*Math.cos(a),36+28*Math.sin(a)], hand=[bell[0],bell[1]+7], neck=[100,46];
-  const mid=[(neck[0]+hand[0])/2,(neck[1]+hand[1])/2];
-  return {head:[100,30],neck,hip:[100,105],legs:FRONTLEGS,front:true,bell,arms:[[[mid[0]-16,mid[1]+10],hand],[[mid[0]+16,mid[1]+10],hand]]};
-}
-function walkPose(t){
-  const s=Math.sin(t*Math.PI*2),k=14*s;
-  return {head:[100,30],neck:[100,46],hip:[100,105],legs:[[[100+k*.6,143],[100+k,G]],[[100-k*.6,143],[100-k,G]]],arms:[[[100,75],[100,102]]],bell:[100,114+Math.abs(s)*1.5]};
-}
-function glowAt(x,j,i){
-  const n=j.neck,h=j.hip;
-  const pt={hip:h,neck:[n[0],n[1]-2],mid:[n[0]+(h[0]-n[0])*.35,n[1]+(h[1]-n[1])*.35],waist:[h[0],h[1]-14],knee:j.legs[0]?j.legs[0][0]:h}[x.glow];
-  return [pt[0],pt[1],14+8*i,(.18+.3*i).toFixed(2)];
-}
-const ease=x=>(1-Math.cos(Math.PI*x))/2;
-const lives=[];
-const list=document.getElementById("list");
-EX.forEach(x=>{
-  const c=document.createElement("article");c.className="ex";
-  c.innerHTML=`<div class="ex-head"><h2>${x.name}</h2><span class="tag${x.swap?" swap":""}">${x.tag}</span><div class="meta">${x.target} · ${x.dose}</div></div><div class="panels"></div><ol>${x.steps.map(s=>`<li>${s}</li>`).join("")}</ol><p class="cue${x.w?" w":""}">${x.cue}</p>`;
-  const p=c.querySelector(".panels");
-  const f=document.createElement("figure");f.className="live";
-  const svg=el("svg",{viewBox:"0 0 200 196",role:"img","aria-label":x.name+" animation"});
-  f.appendChild(svg);
-  const hud=document.createElement("div");hud.className="hud";hud.innerHTML=`<span class="phase">${x.panels[0].label}</span><span class="reps">Rep <b>1</b></span>`;
-  f.appendChild(hud);p.appendChild(f);
-  x.panels.forEach(pn=>{const fg=document.createElement("figure");const s=el("svg",{viewBox:"0 0 200 196",role:"img","aria-label":x.name+": "+pn.label});render(s,pn.j);fg.appendChild(s);const cap=document.createElement("figcaption");cap.textContent=pn.label;fg.appendChild(cap);p.appendChild(fg)});
-  lives.push({x,svg,phase:hud.querySelector(".phase"),reps:hud.querySelector("b"),last:-1});
-  list.appendChild(c);
-});
-function frame(now){
-  for(const L of lives){
-    const x=L.x,cyc=now/x.period,rep=Math.floor(cyc)%12+1,f=cyc%1;
-    let j,i,label;
-    if(x.halo){j=haloPose(Math.PI/2+f*Math.PI*2);i=.5+.5*Math.sin(f*Math.PI*2);label=f<.15||f>.85?x.panels[0].label:x.panels[1].label}
-    else if(x.walk){j=walkPose(f);i=.5+.5*Math.abs(Math.sin(f*Math.PI*2));label=x.panels[1].label}
-    else{const t=ease(f<.5?f*2:2-f*2);j=tween(x.panels[0].j,x.panels[1].j,t);i=t;label=t<.5?x.panels[0].label:x.panels[1].label}
-    render(L.svg,j,{arrows:false,trail:x.halo,glow:glowAt(x,j,i)});
-    if(L.phase.textContent!==label)L.phase.textContent=label;
-    if(L.last!==rep){L.reps.textContent=rep;L.last=rep}
-  }
-}
-let playing=true,raf=0,offset=0,pausedAt=0;
-const btn=document.getElementById("toggle");
-function loop(now){frame(now-offset);raf=requestAnimationFrame(loop)}
-function play(){offset+=performance.now()-pausedAt;playing=true;btn.textContent="Pause";btn.setAttribute("aria-pressed","false");raf=requestAnimationFrame(loop)}
-function pause(){cancelAnimationFrame(raf);pausedAt=performance.now();playing=false;btn.textContent="Play";btn.setAttribute("aria-pressed","true")}
-btn.addEventListener("click",()=>playing?pause():play());
-frame(0);
-let reduce=false;try{reduce=matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){}
-if(reduce){pausedAt=performance.now();playing=false;btn.textContent="Play";btn.setAttribute("aria-pressed","true")}else{raf=requestAnimationFrame(loop)}
-</script>
+// ===== Stick-figure engine =====
+const L = { torso: 52, neck: 9, hr: 10, ua: 27, fa: 25, th: 40, sh: 38, ft: 12 };
+const D2R = Math.PI / 180;
+const dir = a => [Math.cos(a * D2R), Math.sin(a * D2R)];
+const add = (p, v, s = 1) => [p[0] + v[0] * s, p[1] + v[1] * s];
 
-</body></html>
+function ik(root, target, a, b, bend) {
+  const dx = target[0] - root[0], dy = target[1] - root[1];
+  const d = Math.hypot(dx, dy) || 0.001;
+  const u = [dx / d, dy / d];
+  const dc = Math.min(Math.max(d, Math.abs(a - b) + 0.01), a + b - 0.01);
+  const along = (a * a - b * b + dc * dc) / (2 * dc);
+  const h = Math.sqrt(Math.max(0, a * a - along * along));
+  const left = [-u[1], u[0]];
+  const joint = [root[0] + u[0] * along + left[0] * h * bend, root[1] + u[1] * along + left[1] * h * bend];
+  const ex = target[0] - joint[0], ey = target[1] - joint[1];
+  const el = Math.hypot(ex, ey) || 1;
+  return [joint, [joint[0] + ex / el * b, joint[1] + ey / el * b]];
+}
+function resolveT(t, J) {
+  if (Array.isArray(t)) return t;
+  const r = J[t.r]; return [r[0] + t.o[0], r[1] + t.o[1]];
+}
+function limb(root, spec, a, b, J) {
+  if (spec.t) return ik(root, resolveT(spec.t, J), a, b, spec.b ?? 1);
+  const m = add(root, dir(spec.a[0]), a);
+  return [m, add(m, dir(spec.a[1]), b)];
+}
+function solve(ex, p) {
+  const view = ex.view || 'side';
+  let hip = p.hip;
+  if (p.pin) {
+    const s = p.leg1.a; let v = add([0, 0], dir(s[0]), L.th);
+    if (p.pin.j === 'ankle1') v = add(v, dir(s[1]), L.sh);
+    hip = [p.pin.at[0] - v[0], p.pin.at[1] - v[1]];
+  }
+  const J = { hip };
+  if (view === 'top') {
+    J.sh = hip; J.headC = [hip[0], hip[1] + 3];
+    J.sr1 = [hip[0] + 12, hip[1]]; J.sr2 = [hip[0] - 12, hip[1]];
+    [J.elbow2, J.hand2] = limb(J.sr2, p.arm2, L.ua, L.fa, J);
+    [J.elbow1, J.hand1] = limb(J.sr1, p.arm1, L.ua, L.fa, J);
+    return J;
+  }
+  const sh = add(hip, dir(p.torso), L.torso); J.sh = sh;
+  const nd = dir(p.neck);
+  J.neckTop = add(sh, nd, L.neck); J.headC = add(sh, nd, L.neck + L.hr);
+  const wS = view === 'side' ? 0 : 12, wH = view === 'side' ? 0 : 7;
+  J.sr1 = [sh[0] + wS, sh[1]]; J.sr2 = [sh[0] - wS, sh[1]];
+  J.hr1 = [hip[0] + wH, hip[1]]; J.hr2 = [hip[0] - wH, hip[1]];
+  const fs = view === 'side' ? 1 : 0.5;
+  [J.knee2, J.ankle2] = limb(J.hr2, p.leg2, L.th, L.sh, J);
+  J.toe2 = add(J.ankle2, dir(p.leg2.f ?? 0), L.ft * fs);
+  [J.knee1, J.ankle1] = limb(J.hr1, p.leg1, L.th, L.sh, J);
+  J.toe1 = add(J.ankle1, dir(p.leg1.f ?? 0), L.ft * fs);
+  [J.elbow2, J.hand2] = limb(J.sr2, p.arm2, L.ua, L.fa, J);
+  [J.elbow1, J.hand1] = limb(J.sr1, p.arm1, L.ua, L.fa, J);
+  return J;
+}
+function mergeDeep(a, b) {
+  if (b === undefined) return a;
+  if (Array.isArray(b) || typeof b !== 'object' || b === null) return b;
+  const o = Object.assign({}, a);
+  for (const k in b) {
+    const av = a ? a[k] : undefined, bv = b[k];
+    o[k] = (av && typeof av === 'object' && !Array.isArray(av) && bv && typeof bv === 'object' && !Array.isArray(bv)) ? mergeDeep(av, bv) : bv;
+  }
+  return o;
+}
+function mirror(s) {
+  const o = {};
+  if (s.a) o.a = [180 - s.a[0], 180 - s.a[1]];
+  if (s.t) o.t = [-s.t[0], s.t[1]];
+  if (s.b !== undefined) o.b = -s.b;
+  if (s.f !== undefined) o.f = 180 - s.f;
+  return o;
+}
+function lerpV(a, b, k) {
+  if (typeof a === 'number' && typeof b === 'number') return a + (b - a) * k;
+  if (Array.isArray(a) && Array.isArray(b)) return a.map((v, i) => lerpV(v, b[i], k));
+  if (a && b && typeof a === 'object' && typeof b === 'object') {
+    const o = {}; const keys = new Set([...Object.keys(a), ...Object.keys(b)]);
+    for (const key of keys) o[key] = (key in a && key in b) ? lerpV(a[key], b[key], k) : (key in b ? b[key] : a[key]);
+    return o;
+  }
+  return k < 0.5 ? a : b;
+}
+const ease = k => 0.5 - 0.5 * Math.cos(Math.PI * k);
+function prepMove(ex) {
+  ex.frames = ex.frames.map(f => {
+    let p = mergeDeep(ex.base, f.p || {});
+    p = Object.assign({ pulse: 0, lift: 0, curve: 0 }, p);
+    if (ex.sym) { p.arm2 = mirror(p.arm1); p.leg2 = p.leg1 ? mirror(p.leg1) : p.leg2; }
+    if (p.face === undefined) p.face = (p.neck ?? 90) - 90;
+    return Object.assign({}, f, { p });
+  });
+  let t = 0;
+  ex.seg = ex.frames.map((f, i) => { const d = f.d ?? 600, h = f.h ?? 300; const s = { start: t, d, h, i }; t += d + h; return s; });
+  ex.cycle = t;
+  ex.fit = ex.box || computeFit(ex);
+  return ex;
+}
+function poseAt(ex, ms) {
+  const t = ((ms % ex.cycle) + ex.cycle) % ex.cycle;
+  const n = ex.frames.length;
+  for (const s of ex.seg) {
+    if (t < s.start + s.d + s.h) {
+      const prev = ex.frames[(s.i - 1 + n) % n].p, cur = ex.frames[s.i].p;
+      const k = t < s.start + s.d ? ease((t - s.start) / s.d) : 1;
+      return { pose: lerpV(prev, cur, k), cap: ex.frames[s.i].c, idx: s.i };
+    }
+  }
+  return { pose: ex.frames[0].p, cap: ex.frames[0].c, idx: 0 };
+}
+function computeFit(ex) {
+  let x0 = 1e9, x1 = -1e9, y0 = 1e9, y1 = -1e9;
+  const ext = (x, y) => { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); };
+  for (const f of ex.frames) {
+    const J = solve(ex, f.p);
+    for (const v of Object.values(J)) if (Array.isArray(v) && v.length === 2 && typeof v[0] === 'number') ext(v[0], v[1]);
+    ext(J.headC[0] - L.hr, J.headC[1] - L.hr); ext(J.headC[0] + L.hr, J.headC[1] + L.hr);
+    const pr = ex.props || {};
+    if (pr.kb) ext(J.hand1[0] - 10, J.hand1[1] - 24);
+    if (pr.wheel) { ext(J.hand1[0] - 11, J.hand1[1] - 11); ext(J.hand1[0] + 11, J.hand1[1] + 11); }
+  }
+  const pr = ex.props || {};
+  if (pr.counter) { ext(pr.counter.x + 34, pr.counter.y); ext(pr.counter.x, 0); }
+  if (pr.mat) { ext(pr.mat[0], pr.mat[2]); ext(pr.mat[1], pr.mat[3]); }
+  if (ex.view !== 'top' && !pr.mat) ext(x0, -8);
+  const pad = 10;
+  return [x0 - pad, x1 + pad, y0 - pad + (ex.view !== 'top' && !pr.mat ? 4 : 0), y1 + pad];
+}
+function drawMove(ctx, ex, pose, W, H, C, now) {
+  ctx.clearRect(0, 0, W, H);
+  const b = ex.fit, bw = b[1] - b[0], bh = b[3] - b[2];
+  const s = Math.min(W / bw, H / bh);
+  const ox = (W - bw * s) / 2 - b[0] * s;
+  const oy = (H + bh * s) / 2 + b[2] * s;
+  const P = p => [ox + p[0] * s, oy - p[1] * s];
+  const J = solve(ex, pose);
+  const view = ex.view || 'side', pr = ex.props || {};
+  ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+  if (pr.wall) {
+    const a = P([pr.wall[0], pr.wall[3]]), z = P([pr.wall[1], pr.wall[2]]);
+    ctx.fillStyle = C.wall; ctx.fillRect(a[0], a[1], z[0] - a[0], z[1] - a[1]);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 1;
+    for (let y = 30; y < pr.wall[3]; y += 30) { const l = P([pr.wall[0], y]), r = P([pr.wall[1], y]); ctx.beginPath(); ctx.moveTo(l[0], l[1]); ctx.lineTo(r[0], r[1]); ctx.stroke(); }
+  }
+  if (pr.mat) {
+    const a = P([pr.mat[0], pr.mat[3]]), z = P([pr.mat[1], pr.mat[2]]);
+    ctx.fillStyle = C.floor; ctx.beginPath();
+    if (ctx.roundRect) ctx.roundRect(a[0], a[1], z[0] - a[0], z[1] - a[1], 10 * s); else ctx.rect(a[0], a[1], z[0] - a[0], z[1] - a[1]);
+    ctx.fill();
+  }
+  if (view !== 'top' && !pr.mat) {
+    ctx.fillStyle = C.floor; ctx.fillRect(0, oy, W, H - oy);
+    ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.beginPath(); ctx.moveTo(0, oy); ctx.lineTo(W, oy); ctx.stroke();
+  }
+  if (pr.counter) {
+    const c = pr.counter, a = P([c.x, c.y]), z = P([c.x + 200, 0]);
+    ctx.fillStyle = C.prop; ctx.fillRect(a[0], a[1], z[0] - a[0], z[1] - a[1]);
+    const t0 = P([c.x - 3, c.y + 4]), t1 = P([c.x + 200, c.y]);
+    ctx.fillStyle = C.propTop; ctx.fillRect(t0[0], t0[1], t1[0] - t0[0], t1[1] - t0[1]);
+  }
+  if (pr.plumb !== undefined) {
+    ctx.strokeStyle = C.line; ctx.lineWidth = 2; ctx.setLineDash([5, 6]);
+    const a = P([pr.plumb, b[2]]), z = P([pr.plumb, b[3]]);
+    ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(z[0], z[1]); ctx.stroke(); ctx.setLineDash([]);
+  }
+  const hl = ex.hl || [];
+  const far = view === 'side';
+  const stroke = (pts, col, w, alpha = 1) => {
+    ctx.globalAlpha = alpha; ctx.strokeStyle = col; ctx.lineWidth = w * s; ctx.beginPath();
+    const p0 = P(pts[0]); ctx.moveTo(p0[0], p0[1]);
+    for (let i = 1; i < pts.length; i++) { const q = P(pts[i]); ctx.lineTo(q[0], q[1]); }
+    ctx.stroke(); ctx.globalAlpha = 1;
+  };
+  const limbCol = (name, isFar) => hl.includes(name) ? C.accent : (isFar ? C.far : C.fig);
+  const limbAlpha = (name, isFar) => (hl.includes(name) && isFar) ? 0.55 : 1;
+  const W_L = 6;
+  const leg = n => { const isFar = far && n === 2; stroke([J['hr' + n], J['knee' + n], J['ankle' + n], J['toe' + n]], limbCol('leg' + n, isFar), W_L, limbAlpha('leg' + n, isFar)); };
+  const arm = n => { const isFar = far && n === 2; stroke([J['sr' + n], J['elbow' + n], J['hand' + n]], limbCol('arm' + n, isFar), W_L, limbAlpha('arm' + n, isFar)); };
+  const head = () => {
+    const c = P(J.headC);
+    ctx.fillStyle = C.fig; ctx.beginPath(); ctx.arc(c[0], c[1], L.hr * s, 0, Math.PI * 2); ctx.fill();
+    ctx.fillStyle = C.stage;
+    if (view === 'side') {
+      const e = P(add(J.headC, dir(pose.face), 5.5));
+      ctx.beginPath(); ctx.arc(e[0], e[1], 1.6 * s, 0, Math.PI * 2); ctx.fill();
+    } else if (view === 'front' && !ex.faceDown) {
+      for (const dx of [-3.6, 3.6]) { const e = P([J.headC[0] + dx, J.headC[1] + 1]); ctx.beginPath(); ctx.arc(e[0], e[1], 1.5 * s, 0, Math.PI * 2); ctx.fill(); }
+    } else if (view === 'top') {
+      const e = P([J.headC[0], J.headC[1] + 7]); ctx.beginPath(); ctx.arc(e[0], e[1], 1.6 * s, 0, Math.PI * 2); ctx.fill();
+    }
+  };
+  const torso = () => {
+    if (view === 'top') { stroke([J.sr2, J.sr1], C.fig, 8); return; }
+    const a = P(J.hip), z = P(J.sh);
+    const u = dir(pose.torso), left = [-u[1], u[0]];
+    const mid = [(J.hip[0] + J.sh[0]) / 2, (J.hip[1] + J.sh[1]) / 2];
+    const cp = P(add(mid, left, (pose.curve || 0) * 2));
+    ctx.strokeStyle = C.fig; ctx.lineWidth = 8 * s; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.quadraticCurveTo(cp[0], cp[1], z[0], z[1]); ctx.stroke();
+    stroke([J.sh, J.neckTop], C.fig, 6);
+    if (view === 'front') { stroke([J.sr2, J.sr1], C.fig, 7); stroke([J.hr2, J.hr1], C.fig, 7); }
+  };
+  if (view !== 'top') { leg(2); }
+  if (far) arm(2);
+  torso();
+  head();
+  if (view !== 'top') leg(1);
+  if (pr.wheel) {
+    const c = P(J.hand1), r = 10 * s, rot = J.hand1[0] / 10;
+    ctx.fillStyle = C.stage; ctx.strokeStyle = C.fig; ctx.lineWidth = 3 * s;
+    ctx.beginPath(); ctx.arc(c[0], c[1], r, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.lineWidth = 1.6 * s;
+    for (let i = 0; i < 3; i++) { const a = -rot + i * Math.PI / 3; ctx.beginPath(); ctx.moveTo(c[0] - Math.cos(a) * r, c[1] - Math.sin(a) * r); ctx.lineTo(c[0] + Math.cos(a) * r, c[1] + Math.sin(a) * r); ctx.stroke(); }
+  }
+  if (pose.lift > 0.01) {
+    for (const n of [1, 2]) {
+      const off = [4.5 * pose.lift, -4.5 * pose.lift];
+      stroke([add(J['sr' + n], off), add(J['elbow' + n], off), add(J['hand' + n], off)], C.line, W_L, 0.9);
+    }
+  }
+  if (!far) arm(2);
+  arm(1);
+  if (pr.kb) {
+    const h = J.hand1, c = P([h[0], h[1] - 14]);
+    ctx.strokeStyle = C.kb; ctx.lineWidth = 2.6 * s;
+    ctx.beginPath(); ctx.arc(P(h)[0], P([h[0], h[1] - 4])[1], 4.5 * s, Math.PI, 0); ctx.stroke();
+    ctx.fillStyle = C.kb; ctx.beginPath(); ctx.arc(c[0], c[1], 9.5 * s, 0, Math.PI * 2); ctx.fill();
+  }
+  if (pr.band) {
+    const span = Math.hypot(J.hand1[0] - J.hand2[0], J.hand1[1] - J.hand2[1]);
+    stroke([J.hand2, J.hand1], C.accent, Math.max(2.2, 5 - span / 30));
+  }
+  if (pose.pulse > 0.01) {
+    const m = P([(J.hip[0] + J.sh[0]) / 2, (J.hip[1] + J.sh[1]) / 2]);
+    const wob = 0.5 + 0.5 * Math.sin(now / 160);
+    ctx.globalAlpha = pose.pulse * (0.3 + 0.5 * wob);
+    ctx.strokeStyle = C.accent; ctx.lineWidth = 2.2 * s;
+    for (const r of [17, 25]) { ctx.beginPath(); ctx.ellipse(m[0], m[1], (r + wob * 3) * s, (r * 0.62 + wob * 2) * s, -pose.torso * D2R, 0, Math.PI * 2); ctx.stroke(); }
+    ctx.globalAlpha = 1;
+  }
+  return J;
+}
+
+// ===== Moves =====
+const STAND_ARMS = { arm1: { a: [-98, -86] }, arm2: { a: [-94, -84] } };
+const STAND_LEGS = { hip: [0, 81], torso: 90, neck: 92, leg1: { t: [3, 4], b: 1, f: 0 }, leg2: { t: [-3, 4], b: 1, f: 0 } };
+const FRONT = { hip: [0, 80], torso: 90, neck: 90, leg1: { a: [-87, -90], f: 0 }, leg2: { a: [-93, -90], f: 180 } };
+const MOVES = [
+  // Kettlebell circuit
+  { id: 'swing', hl: ['leg1'], props: { kb: true },
+    base: Object.assign({}, STAND_LEGS, { arm1: { a: [-90, -88] }, arm2: { a: [-92, -90] } }),
+    frames: [
+      { c: 'Hike the bell back between your legs', p: { hip: [-24, 62], torso: 32, neck: 22, arm1: { a: [-118, -118] }, arm2: { a: [-120, -120] } }, d: 650, h: 150 },
+      { c: 'Snap your hips forward, squeeze your glutes', p: { arm1: { a: [-4, -2] }, arm2: { a: [-6, -4] }, pulse: 1 }, d: 550, h: 350 },
+      { c: 'Let it fall and hinge again', p: { hip: [-8, 77], torso: 72, neck: 66, arm1: { a: [-60, -60] }, arm2: { a: [-62, -62] } }, d: 450, h: 0 },
+    ] },
+  { id: 'goblet', hl: ['leg1'], props: { kb: true },
+    base: Object.assign({}, STAND_LEGS, { arm1: { t: { r: 'sh', o: [15, -14] }, b: -1 }, arm2: { t: { r: 'sh', o: [13, -14] }, b: -1 } }),
+    frames: [
+      { c: 'Bell tight to your chest, feet shoulder width', d: 700, h: 400 },
+      { c: 'Sit down between your heels, chest up', p: { hip: [-18, 42], torso: 72, neck: 82 }, d: 1100, h: 400 },
+      { c: 'Drive up through your whole foot', d: 900, h: 300 },
+    ] },
+  { id: 'rdl', hl: ['leg1'], props: { kb: true },
+    base: Object.assign({}, STAND_LEGS, { arm1: { a: [-90, -90] }, arm2: { a: [-92, -92] } }),
+    frames: [
+      { c: 'Stand tall, bell in front of your thighs', d: 800, h: 400 },
+      { c: 'Push your hips back, slide the bell down your legs', p: { hip: [-22, 74], torso: 22, neck: 16, arm1: { a: [-88, -88] }, arm2: { a: [-90, -90] } }, d: 1400, h: 500 },
+      { c: 'Squeeze your glutes to stand back up', d: 1200, h: 300 },
+    ] },
+  { id: 'halo', view: 'front', hl: ['arm1', 'arm2'], props: { kb: true },
+    base: Object.assign({}, FRONT, { arm1: { t: [0, 116], b: 1 }, arm2: { t: [0, 116], b: -1 } }),
+    frames: [
+      { c: 'Bell at your chest, hold the horns', d: 500, h: 300 },
+      { c: 'Circle it past your right ear', p: { arm1: { t: [26, 152], b: -1 }, arm2: { t: [26, 152], b: -1 } }, d: 750, h: 0 },
+      { c: 'Behind your head, close to your neck', p: { arm1: { t: [0, 184], b: -1 }, arm2: { t: [0, 184], b: 1 } }, d: 750, h: 0 },
+      { c: 'Past your left ear and back to your chest', p: { arm1: { t: [-26, 152], b: 1 }, arm2: { t: [-26, 152], b: 1 } }, d: 750, h: 0 },
+    ] },
+  { id: 'carry', view: 'front', props: { kb: true },
+    base: Object.assign({}, FRONT, { arm1: { a: [-88, -90] }, arm2: { a: [-96, -92] } }),
+    frames: [
+      { c: 'Bell at your side, shoulders level', d: 500, h: 200, p: { pulse: 1 } },
+      { c: 'Walk slow and stay tall', p: { leg1: { a: [-72, -100] }, pulse: 1 }, d: 450, h: 0 },
+      { c: 'Walk slow and stay tall', p: { pulse: 1 }, d: 450, h: 0 },
+      { c: "Don't lean toward the bell", p: { leg2: { a: [-108, -80] }, pulse: 1 }, d: 450, h: 0 },
+      { c: "Don't lean toward the bell", p: { pulse: 1 }, d: 450, h: 0 },
+    ] },
+  // From the cheat sheet
+  { id: 'squat', base: Object.assign({ hip: [-2, 81], torso: 90, neck: 92, leg1: { t: [0, 4], b: 1, f: 0 }, leg2: { t: [5, 4], b: 1, f: 0 } }, STAND_ARMS),
+    frames: [
+      { c: 'Stand tall, feet shoulder-width apart', d: 700, h: 500 },
+      { c: "Sit back like there's a chair behind you", p: { hip: [-26, 46], torso: 52, neck: 62, arm1: { a: [2, 4] }, arm2: { a: [6, 6] } }, d: 1000, h: 350 },
+      { c: 'Drive up through your heels', d: 900, h: 300 },
+    ] },
+  { id: 'pushup', hl: ['arm1'],
+    base: { hip: [-8.6, 35.6], torso: 20.7, neck: 12, leg1: { t: [-81.6, 8], b: 1, f: -40 }, leg2: { t: [-76, 8], b: 1, f: -40 }, arm1: { t: [40, 4], b: -1 }, arm2: { t: [44, 4], b: -1 } },
+    frames: [
+      { c: 'Hands under shoulders, body straight', d: 700, h: 400 },
+      { c: 'Lower your chest toward the floor', p: { hip: [-8.6, 20], torso: 8, neck: 2 }, d: 1000, h: 250 },
+      { c: "Push back up. Don't let your hips sag", d: 900, h: 300 },
+    ] },
+  { id: 'taps', base: { hip: [-8.6, 35.6], torso: 20.7, neck: 8, leg1: { t: [-81.6, 8], b: 1, f: -40 }, leg2: { t: [-76, 8], b: 1, f: -40 }, arm1: { t: [40, 4], b: -1 }, arm2: { t: [44, 4], b: -1 } },
+    frames: [
+      { c: 'High plank, hands under shoulders', d: 450, h: 400 },
+      { c: 'Tap the opposite shoulder', p: { arm1: { t: [37, 47], b: 1 } }, d: 450, h: 250 },
+      { c: 'Keep your hips still', d: 450, h: 150 },
+      { c: 'Switch hands', p: { arm2: { t: [41, 47], b: 1 } }, d: 450, h: 250 },
+      { c: 'Keep your hips still', d: 450, h: 150 },
+    ] },
+  { id: 'lunge', base: Object.assign({ hip: [0, 81], torso: 90, neck: 92, leg1: { t: [2, 4], b: 1, f: 0 }, leg2: { t: [-2, 4], b: 1, f: 0 } }, STAND_ARMS),
+    frames: [
+      { c: 'Stand tall', d: 800, h: 400 },
+      { c: 'Step forward, drop the back knee toward the floor', p: { hip: [-2, 46], leg1: { t: [34, 4], f: 0 }, leg2: { t: [-38, 10], f: -50 } }, d: 900, h: 300 },
+      { c: 'Push back to standing', d: 800, h: 200 },
+      { c: 'Switch legs', p: { hip: [-2, 46], leg2: { t: [34, 4], f: 0 }, leg1: { t: [-38, 10], f: -50 } }, d: 900, h: 300 },
+      { c: 'Push back to standing', d: 800, h: 200 },
+    ] },
+  { id: 'plank', base: { hip: [-11, 18], torso: 14, neck: 6, leg1: { t: [-87.8, 8], b: 1, f: -40 }, leg2: { t: [-84, 8], b: 1, f: -40 }, arm1: { t: [63, 5], b: -1 }, arm2: { t: [66, 5], b: -1 } },
+    frames: [
+      { c: 'Forearms down, elbows under shoulders', d: 600, h: 700 },
+      { c: 'Squeeze glutes, fists, and abs. Hold 20 sec', p: { hip: [-11.1, 22.4], torso: 10.6, neck: 4, pulse: 1 }, d: 600, h: 2400 },
+      { c: 'Rest 10 sec. 3 rounds', d: 600, h: 700 },
+    ] },
+  { id: 'hollow', base: { hip: [0, 10], torso: 180, neck: 180, leg1: { a: [0, 0], f: 80 }, leg2: { a: [-1, -1], f: 80 }, arm1: { a: [178, 178] }, arm2: { a: [179, 179] } },
+    frames: [
+      { c: 'Lie on your back', d: 800, h: 600 },
+      { c: 'Low back pressed down, shoulders and legs up', p: { torso: 162, neck: 156, leg1: { a: [14, 14], f: 70 }, leg2: { a: [12, 12], f: 70 }, arm1: { a: [168, 170] }, arm2: { a: [170, 172] }, pulse: 1 }, d: 900, h: 2400 },
+      { c: 'Rest, then 3 rounds', d: 800, h: 500 },
+    ] },
+  { id: 'wheel', props: { wheel: true },
+    base: { pin: { j: 'knee1', at: [0, 5] }, torso: 20, neck: 0, leg1: { a: [-90, 180], f: 190 }, leg2: { a: [-90, 180], f: 190 }, arm1: { t: [55, 10], b: -1 }, arm2: { t: [55, 10], b: -1 } },
+    frames: [
+      { c: 'Kneel, hands on the wheel', d: 1400, h: 500 },
+      { c: 'Roll out slow, keep your back flat', p: { torso: 12, neck: 5, leg1: { a: [-155, 180] }, leg2: { a: [-155, 180] }, arm1: { t: [128, 10] }, arm2: { t: [128, 10] } }, d: 1600, h: 300 },
+      { c: 'Pull back with your abs', d: 1400, h: 300 },
+    ] },
+  { id: 'deadbug', base: { hip: [0, 10], torso: 180, neck: 180, arm1: { a: [90, 90] }, arm2: { a: [92, 92] }, leg1: { a: [90, 0], f: 60 }, leg2: { a: [88, -2], f: 60 } },
+    frames: [
+      { c: 'Arms up, knees over hips', d: 1000, h: 400 },
+      { c: 'Lower one arm and the opposite leg', p: { arm1: { a: [168, 172] }, leg2: { a: [10, 8], f: 70 } }, d: 1100, h: 300 },
+      { c: 'Back to start', d: 1000, h: 200 },
+      { c: 'Switch sides', p: { arm2: { a: [168, 172] }, leg1: { a: [10, 8], f: 70 } }, d: 1100, h: 300 },
+      { c: 'Back to start', d: 1000, h: 200 },
+    ] },
+  { id: 'kneechest', hl: ['leg1'], base: { hip: [0, 10], torso: 180, neck: 180, leg1: { a: [50, -60], f: 0 }, leg2: { a: [48, -62], f: 0 }, arm1: { t: [-1, 9], b: -0.2 }, arm2: { t: [1, 9], b: -0.2 } },
+    frames: [
+      { c: 'On your back, knees bent', d: 900, h: 500 },
+      { c: 'Hug one knee to your chest. Hold 30 sec', p: { leg1: { a: [115, -15], f: 10 }, arm1: { t: [-12, 42] }, arm2: { t: [-14, 40] } }, d: 1000, h: 2200 },
+      { c: 'Switch sides', d: 900, h: 400 },
+    ] },
+  { id: 'catcow', base: { pin: { j: 'knee1', at: [0, 5] }, torso: 9, neck: 0, face: -90, leg1: { a: [-90, 180], f: 185 }, leg2: { a: [-90, 180], f: 185 }, arm1: { t: [52, 3], b: -1 }, arm2: { t: [55, 3], b: -1 } },
+    frames: [
+      { c: 'Hands under shoulders, knees under hips', d: 1000, h: 400 },
+      { c: 'Cat: round your back up, tuck your chin', p: { curve: 12, neck: -55, face: -125 }, d: 1300, h: 500 },
+      { c: 'Cow: drop your belly, look up', p: { curve: -9, neck: 32, face: -15 }, d: 1600, h: 500 },
+    ] },
+  { id: 'fig4', hl: ['leg1'], base: { hip: [0, 10], torso: 180, neck: 180, leg2: { a: [65, -65], f: 0 }, leg1: { t: { r: 'knee2', o: [3, 5] }, b: -1, f: 90 }, arm1: { t: [-1, 9], b: -0.2 }, arm2: { t: [1, 9], b: -0.2 } },
+    frames: [
+      { c: 'Cross one ankle over the other knee', d: 900, h: 700 },
+      { c: 'Pull that leg in. Hold 30 sec', p: { leg2: { a: [100, 5] }, arm1: { t: { r: 'knee2', o: [-2, -8] } }, arm2: { t: { r: 'knee2', o: [0, -10] } } }, d: 1100, h: 2200 },
+      { c: 'Switch sides', d: 900, h: 400 },
+    ] },
+  { id: 'chintuck', props: { plumb: 0 }, box: [-58, 62, 66, 176],
+    base: Object.assign({ hip: [0, 81], torso: 90, neck: 68, face: -12, leg1: { t: [0, 4], b: 1, f: 0 }, leg2: { t: [3, 4], b: 1, f: 0 } }, STAND_ARMS),
+    frames: [
+      { c: 'Head drifts forward at the desk', d: 700, h: 700 },
+      { c: 'Pull straight back, make a double chin. Hold 3 sec', p: { neck: 99, face: 0 }, d: 700, h: 3000 },
+      { c: 'Relax. Repeat 10', d: 700, h: 300 },
+    ] },
+  { id: 'angels', view: 'front', sym: true, hl: ['arm1', 'arm2'], props: { wall: [-62, 62, 0, 200] },
+    base: { hip: [0, 80], torso: 90, neck: 90, leg1: { a: [-87, -90], f: 0 }, arm1: { a: [0, 90] } },
+    frames: [
+      { c: 'Back flat on the wall, arms in a goalpost', d: 1300, h: 500 },
+      { c: 'Slide your arms up, keep them on the wall', p: { arm1: { a: [52, 78] } }, d: 1300, h: 300 },
+      { c: 'Slide back down slow', d: 1300, h: 300 },
+    ] },
+  { id: 'yt', view: 'front', sym: true, faceDown: true, hl: ['arm1', 'arm2'], props: { mat: [-80, 80, -6, 188] },
+    base: { hip: [0, 80], torso: 90, neck: 90, leg1: { a: [-88, -90], f: -90 }, arm1: { a: [-92, -92] } },
+    frames: [
+      { c: 'Face down on the floor (view from above)', d: 800, h: 500 },
+      { c: 'Y: lift your arms, squeeze your shoulder blades. 2 sec', p: { arm1: { a: [56, 56] }, lift: 1 }, d: 900, h: 2000 },
+      { c: 'Lower and relax', d: 800, h: 300 },
+      { c: 'T: arms straight out, lift and squeeze. 2 sec', p: { arm1: { a: [0, 0] }, lift: 1 }, d: 900, h: 2000 },
+      { c: 'Lower and relax', d: 800, h: 300 },
+    ] },
+  { id: 'row', hl: ['arm1'], props: { counter: { x: 76, y: 84 }, kb: true },
+    base: { hip: [-14, 74], torso: 16, neck: 8, leg1: { t: [2, 4], b: 1, f: 0 }, leg2: { t: [-22, 4], b: 1, f: 0 }, arm2: { t: [80, 84], b: -1 }, arm1: { t: [38, 38], b: -1 } },
+    frames: [
+      { c: 'One hand on the counter, back flat', d: 900, h: 400 },
+      { c: 'Pull the bell to your hip, elbow back', p: { arm1: { t: [8, 74] } }, d: 800, h: 400 },
+      { c: 'Lower slow. 10, then switch', d: 900, h: 300 },
+    ] },
+  { id: 'band', view: 'top', sym: true, hl: ['arm1', 'arm2'], props: { band: true }, box: [-78, 78, -18, 64],
+    base: { hip: [0, 0], arm1: { t: [4, 51.5], b: -0.3 } },
+    frames: [
+      { c: 'Arms straight out at chest height (view from above)', d: 900, h: 500 },
+      { c: 'Pull apart until the band touches your chest', p: { arm1: { t: [62, 5] } }, d: 900, h: 500 },
+      { c: 'Control it back. 15 reps', d: 900, h: 300 },
+    ] },
+];
+MOVES.forEach(prepMove);
+</script>
+<script>
+const SECTIONS = [
+  { id: 'kb', title: 'Kettlebell circuit', sub: 'About 10 minutes. Two rounds on most days.', moves: ['swing', 'goblet', 'rdl', 'halo', 'carry'],
+    callout: '<b>Dropped: the upright row to the chin.</b> It tends to pinch the shoulder and works the neck muscles that are already tight. The kettlebell row in Neck and upper back replaces it.' },
+  { id: 'cues', title: 'Daily cues', sub: 'Tied to things you already do.', moves: ['squat', 'pushup', 'taps', 'lunge'] },
+  { id: 'core', title: 'Bedtime core finisher', sub: 'Pick 1 or 2. About 5 minutes.', moves: ['plank', 'hollow', 'deadbug'] },
+  { id: 'back', title: 'Lower back', sub: 'The stretches that gave you relief before.', moves: ['kneechest', 'catcow', 'fig4'] },
+  { id: 'neck', title: 'Neck and upper back', sub: 'For desk posture and neck tension.', moves: ['chintuck', 'angels', 'yt', 'row', 'band'] },
+];
+const INFO = {
+  swing: { name: 'Kettlebell Swing', when: 'Kettlebell circuit', reps: '15-20', unit: 'reps', cues: ['Push your hips back, hike the bell between your legs', 'Snap your hips forward and squeeze your glutes', "Hips do the work, not your arms. Back stays flat"] },
+  goblet: { name: 'Goblet Squat', when: 'Kettlebell circuit', reps: '10-12', unit: 'reps', cues: ['Hold the bell by the horns, tight to your chest', 'Sit straight down between your heels, chest up', 'Only go as low as your back stays flat'] },
+  rdl: { name: 'Romanian Deadlift', when: 'Kettlebell circuit', reps: '10', unit: 'slow reps', cues: ['Soft knees, push your hips straight back', 'Slide the bell down until your hamstrings stretch', 'The slow version of the swing. Builds the strength it uses'] },
+  halo: { name: 'Halo', when: 'Kettlebell circuit', reps: '5', unit: 'each direction, light bell', cues: ['Hold the bell upside down by the horns', 'Circle it close around your head', 'Ribs down, head still. Shoulders move, not your neck'] },
+  carry: { name: 'Suitcase Carry', when: 'Kettlebell circuit', reps: '30 sec', unit: 'each side', cues: ['Bell in one hand like a suitcase', "Stand tall, don't lean toward the bell", 'Walk slow around the room, then switch hands'] },
+  squat: { name: 'Squats', when: 'While the coffee brews', reps: '10', unit: 'reps', cues: ['Feet shoulder-width, toes slightly out', 'Sit back, chest up, knees over toes', 'Go as low as feels solid, then stand tall'] },
+  pushup: { name: 'Push-ups', when: 'While the kids brush teeth', reps: '10', unit: 'reps', cues: ['Hands a bit wider than your shoulders', 'One straight line from head to heels', 'Too hard? Put your hands on a counter'] },
+  taps: { name: 'Plank Shoulder Taps', when: 'Waiting on the microwave or kettle', reps: '20', unit: 'taps', cues: ['High plank, hands under shoulders', 'Feet wide makes it easier to stay steady', 'Tap without rocking your hips'] },
+  lunge: { name: 'Lunges', when: 'Before getting in the van', reps: '10', unit: '5 each leg', cues: ['Big step forward, torso tall', 'Back knee drops toward the floor', 'Push through the front heel to come back'] },
+  plank: { name: 'Hard Plank', when: 'Bedtime', reps: '20 sec', unit: 'rest 10, 3 rounds', cues: ['Forearms down, elbows under shoulders', 'Squeeze glutes, fists, and abs hard', 'Straight line, no sagging hips'] },
+  hollow: { name: 'Hollow Body Hold', when: 'Bedtime', reps: '20-30 sec', unit: '3 rounds', cues: ['Press your low back flat into the floor', 'Lift shoulders and legs a few inches', 'Arms by your sides makes it easier'] },
+  wheel: { name: 'Ab Wheel Rollouts', when: 'Bedtime', reps: '5-8', unit: 'reps, 3 sets', cues: ['Start on your knees, hands on the wheel', 'Roll only as far as your back stays flat', 'Pull back with your abs, not your arms'] },
+  deadbug: { name: 'Dead Bugs', when: 'Bedtime', reps: '10', unit: 'each side', cues: ['Arms up, knees bent at 90 degrees', 'Lower one arm and the opposite leg slowly', 'Keep your low back glued to the floor'] },
+  kneechest: { name: 'Knee-to-Chest', when: 'Waking up, still in bed', reps: '30 sec', unit: 'each side', cues: ['Lie on your back, knees bent', 'Hug one knee toward your chest', 'Breathe slow and relax into it'] },
+  catcow: { name: 'Cat-Cow', when: 'While the coffee brews', reps: '10', unit: 'slow reps', cues: ['Hands under shoulders, knees under hips', 'Cat: round your back up, chin down', 'Cow: let your belly drop, look up'] },
+  fig4: { name: 'Figure-4 Stretch', when: 'Bedtime, before the core finisher', reps: '30 sec', unit: 'each side', cues: ['On your back, cross one ankle over the other knee', 'Pull the bottom leg toward your chest', 'You should feel it in the crossed hip'] },
+  chintuck: { name: 'Chin Tucks', when: 'Every hour at your desk', reps: '10', unit: 'reps, 3 sec hold', cues: ['Sit or stand tall', 'Pull your head straight back, like a double chin', "Don't tip your head down"], link: 'https://www.youtube.com/shorts/3ctIwvT823s', label: 'Watch the Short' },
+  angels: { name: 'Wall Angels', when: 'Work break', reps: '10', unit: 'reps', cues: ['Back, head, and arms against the wall', 'Slide arms up into a V and back down', 'Only go as high as you can keep contact'], link: 'https://www.youtube.com/shorts/y2ZUHmx-IFY', label: 'Watch the Short' },
+  yt: { name: 'Y and T Raises', when: '2 to 3 times a week', reps: '10', unit: 'of each, 2 sec hold', cues: ['Lie face down, forehead on the floor', 'Lift arms into a Y, then a T, thumbs up', 'Squeeze your shoulder blades together'], link: 'https://www.youtube.com/shorts/VKng6u1xAuM', label: 'Watch the Short' },
+  row: { name: 'Kettlebell Row', when: '2 to 3 times a week', reps: '10', unit: 'each side', cues: ['One hand on the counter, back flat', 'Pull the bell to your hip, elbow close', 'Squeeze your shoulder blade, lower slow'], link: 'https://www.youtube.com/watch?v=k5BC9d6pR3A', label: 'Watch the demo' },
+  band: { name: 'Band Pull-aparts', when: '2 to 3 times a week', reps: '15', unit: 'reps', cues: ['Flat band at chest height, arms straight', 'Pull apart until the band touches your chest', 'Hands closer together makes it harder'] },
+};
+
+const byId = Object.fromEntries(MOVES.map(m => [m.id, m]));
+let reduce = false; try { reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+const today = new Date(); const dayKey = 'bry-workout-' + today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+let done = new Set();
+try { done = new Set(JSON.parse(localStorage.getItem(dayKey) || '[]')); } catch (e) {}
+const saveDone = () => { try { localStorage.setItem(dayKey, JSON.stringify([...done])); } catch (e) {} document.getElementById('tally').textContent = 'Done today: ' + done.size; };
+
+let C = {};
+function readColors() {
+  const s = getComputedStyle(document.documentElement), g = n => s.getPropertyValue(n).trim();
+  C = { fig: g('--fig'), far: g('--fig-far'), accent: g('--accent'), floor: g('--floor'), line: g('--figline'), prop: g('--prop'), propTop: g('--prop-top'), stage: g('--stage'), wall: g('--wall'), kb: g('--kb') };
+}
+readColors();
+try { matchMedia('(prefers-color-scheme: dark)').addEventListener('change', readColors); } catch (e) {}
+new MutationObserver(readColors).observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+
+const cards = [];
+const host = document.getElementById('sections');
+for (const sec of SECTIONS) {
+  const el = document.createElement('section'); el.id = sec.id;
+  el.innerHTML = `<div class="sec-head"><h2>${sec.title}</h2><p>${sec.sub}</p></div>${sec.callout ? `<p class="callout">${sec.callout}</p>` : ''}<div class="grid"></div>`;
+  const grid = el.querySelector('.grid');
+  for (const id of sec.moves) {
+    const ex = byId[id], info = INFO[id];
+    const card = document.createElement('article'); card.className = 'card';
+    card.innerHTML = `
+      <button class="stage" id="stage-${id}" aria-label="Pause or play the ${info.name} animation"><canvas></canvas><span class="pp"></span></button>
+      <div class="phase" aria-hidden="true"></div>
+      <div class="body">
+        <div class="top"><div><h3>${info.name}</h3><div class="when">${info.when}</div></div>
+          <div class="reps"><b>${info.reps}</b><span>${info.unit}</span></div></div>
+        <ul>${info.cues.map(c => `<li>${c}</li>`).join('')}</ul>
+      </div>
+      <div class="foot">
+        <button class="btn done" id="done-${id}" aria-pressed="${done.has(id)}">${done.has(id) ? 'Done today' : 'Mark done'}</button>
+        ${info.link ? `<a class="btn" href="${info.link}" target="_blank" rel="noopener">${info.label}</a>` : ''}
+      </div>`;
+    grid.appendChild(card);
+    const st = { ex, canvas: card.querySelector('canvas'), phase: card.querySelector('.phase'), pp: card.querySelector('.pp'), playing: !reduce, elapsed: 0, last: null, visible: true, cap: null };
+    if (reduce) st.elapsed = ex.seg[1].start + ex.seg[1].d;
+    card.querySelector('.stage').addEventListener('click', () => { st.playing = !st.playing; st.last = null; render(st, performance.now()); });
+    const db = card.querySelector('.done');
+    db.addEventListener('click', () => {
+      if (done.has(id)) done.delete(id); else done.add(id);
+      db.setAttribute('aria-pressed', done.has(id)); db.textContent = done.has(id) ? 'Done today' : 'Mark done'; saveDone();
+    });
+    cards.push(st);
+  }
+  host.appendChild(el);
+}
+saveDone();
+document.getElementById('reset').addEventListener('click', () => {
+  done.clear();
+  document.querySelectorAll('.done').forEach(b => { b.setAttribute('aria-pressed', 'false'); b.textContent = 'Mark done'; });
+  saveDone();
+});
+
+function size(st) {
+  const r = st.canvas.getBoundingClientRect(), dpr = Math.min(2, window.devicePixelRatio || 1);
+  const w = Math.max(1, Math.round(r.width * dpr)), h = Math.max(1, Math.round(r.height * dpr));
+  if (st.canvas.width !== w || st.canvas.height !== h) { st.canvas.width = w; st.canvas.height = h; }
+}
+function render(st, now) {
+  size(st);
+  const ctx = st.canvas.getContext('2d');
+  const { pose, cap } = poseAt(st.ex, st.elapsed);
+  drawMove(ctx, st.ex, pose, st.canvas.width, st.canvas.height, C, now);
+  if (cap !== st.cap) { st.phase.textContent = cap; st.cap = cap; }
+  st.pp.textContent = st.playing ? 'Tap to pause' : 'Tap to play';
+}
+const io = new IntersectionObserver(es => es.forEach(e => { const st = cards.find(c => c.canvas.parentElement === e.target); if (st) st.visible = e.isIntersecting; }), { rootMargin: '100px' });
+cards.forEach(st => io.observe(st.canvas.parentElement));
+function loop(now) {
+  for (const st of cards) {
+    if (st.playing) { if (st.last != null) st.elapsed += Math.min(100, now - st.last); st.last = now; }
+    if (st.visible) render(st, now);
+  }
+  requestAnimationFrame(loop);
+}
+cards.forEach(st => render(st, performance.now()));
+requestAnimationFrame(loop);
+</script>
