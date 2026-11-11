@@ -55,14 +55,50 @@ In order to run the development server, follow this simple guide once you have i
 2. In terminal, run the command `npm run start`
 3. If your default browser was not automatically launched, view the website at the IP address presented in the terminal. This should generally be [htttp://localhost:3000](http://localhost:3000 "localhost site").
 
-## Creating and Deploying to Github Pages
+## Deploying bryanjebyrd.com (read this first)
+
+The live site is served by GitHub Pages from the **`gh-pages`** branch (root folder), with the custom domain set by `public/CNAME`. Never edit `gh-pages` by hand — it only holds build output.
+
+### Which branch do I deploy from?
+
+Each site version gets its own branch named `vNNN`, matching the `version` in `package.json`:
+
+| Branch | Version | What it added |
+| ------ | ------- | ------------- |
+| `v001` | 0.0.1 | First version of the portfolio site |
+| `v002` | 0.0.2 | Exercise plan page at `/exercise` |
+
+**Deploy from the newest `vNNN` branch.** `main` is behind and is not what's live.
+
+To double-check what's live, run `git log -1 origin/gh-pages`. Each deploy's commit message names the branch and commit it was built from, e.g. `chore(deploy): publish v002@abc1234`.
+
+### Deploy steps
+
+1. `git switch vNNN` (newest version branch) and `git pull`
+2. Commit and push your changes — `git status` should be clean, so what's live is also on GitHub
+3. `npm run deploy` — builds the site and pushes `build/` to `gh-pages`
+4. Wait about a minute, then check https://bryanjebyrd.com
+
+Commit messages must follow Conventional Commits (e.g. `feat(exercise): add page`), or the commit hook rejects them. The deploy script already does this for you.
+
+### Starting a new version
+
+1. From the newest branch: `git switch -c vNNN` (next number)
+2. `npm version 0.0.N --no-git-tag-version` to match
+3. Add a row to the table above
+
+### Adding a standalone page (like `/exercise`)
+
+Put the file at `public/<path>/index.html`. Everything in `public/` is copied as-is into the build, so it is served at `https://bryanjebyrd.com/<path>`.
+
+## Creating and Deploying to Github Pages (from a fresh fork)
 
 1. Fork this Repo to a one - {username}.github.io
 2. Update the package.json - Home Property
    - "homepage": "https://{username}.github.io", // Update to correct username
 3. Checkout the main branch for this new repo
 4. Run `npm install --legacy-peer-deps`
-5. Run `npm run deploy -- -m "Deploy React app to GitHub Pages vX.X.X"` //make sure to update the version correctly
+5. Run `npm run deploy`
    - This will create a new branch in the repo called gh-pages, if one doesn't exists other wise it just creates an update
 6. Configure GitHub Pages
    - Navigate to the GitHub Pages settings page
