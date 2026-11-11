@@ -1,6 +1,6 @@
 {
   "name": "techfolio",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": true,
   "homepage": "https://bryanjebyrd.github.io",
   "dependencies": {
@@ -17,7 +17,7 @@
   },
   "scripts": {
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d build -m \"chore(deploy): publish $(git rev-parse --abbrev-ref HEAD)@$(git rev-parse --short HEAD)\"",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
